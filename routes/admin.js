@@ -6,7 +6,6 @@ let adminDetais={
   Name:"shahana",
   Password:"qwerty",
 };
-""
 router.get('/', function(req, res, next) {
   console.log('sdsdsdshi hi');
   res.render('admin/login', { title: 'Express' })
@@ -31,15 +30,16 @@ console.log(req.body.Password);
 }
 else{
   console.log('false');
-  req.loginErr="Invalid usernameor password"
-/*  res.render('admin/else');*/
- res.redirect('/admin/login');
+  
+ /*res.render('admin/else');*/
+ res.redirect('login');
 }
   
 
 })
 router.get('/logout',(req,res)=>{
   
-  res.redirect('/')
+  res.redirect('login');
+  /*res.render('admin/login')*/
 })
 module.exports = router;

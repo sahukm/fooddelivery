@@ -25,8 +25,9 @@ db.connect((err)=>{
   if(err) console.log("connection error"+err)
   else console.log("datbase connected to the port 27017")
 })
-/*app.use('/', indexRouter);*/
-app.use('/', adminRouter);
+app.use('/', indexRouter);
+
+/*app.use('/', adminRouter);*/
 app.use('/admin',adminRouter);
 app.use('/users', usersRouter);
 

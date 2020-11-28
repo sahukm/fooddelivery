@@ -13,34 +13,38 @@
   <body>
     
 <section>
-  <div class="row">
+  <div class="row ">
     <div class="col-md-1 bg-secondary  ">
-      <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" class="img-fluid rounded-circle" alt="Responsive image">
+      <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" class="img-fluid rounded-circle responsive p-2" alt="Responsive image">
       
     </div>
-    <div class="col-md-6   h-100 bg-light ">
-
-     <h1 class="text-danger font-weight-bold" >HOME </h1><h1 class="text-warning">Chef</h1>
+    <div class="col-md-7  bg-light ">
+<h1 class="mt-4"><span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"  class="text-danger font-weight-bold ">Home</span> <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>
+     
 <img src="https://media.istockphoto.com/photos/funny-happy-baker-picture-id186308619" class="img-fluid" alt="Responsive image">
     </div>
 
 
-    <div class="col-md-5 ">
+    <div class="col-md-4 pl-4 bg-white">
+      <br>
+      <h1 class="pt-5"><span>Login to</span>  <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"  class="text-danger font-weight-bold ">Home</span> 
+      <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>
       
-      <h2 class="mt-5">Login to<p class="text-danger font-weight-bold" >HOME </p><p class="text-warning">Chef</p> </h2>
-
-      <form class="mr-5 rounded-circle" action="/login" method="post">
-  <div class="form-group">
+<br>
+      <form class="mr-5 p-4" action="/admin/login" method="post" style="width: 24rem;border-radius: .35rem">
+  <div class="form-group p-3" >
    
-    <input type="text" name="Name"  class="form-control mt-4"  placeholder="Username">
+    <input type="text" name="Name"  class="form-control "  placeholder="Username" style="width: 20rem;border-radius: .75rem;border-width: 2px">
     
-  </div>
-  <div class="form-group ">
-    
-    <input type="text" name="Password" class="form-control mt-4 " placeholder="Password">
   </div>
   
-  <button type="submit" class="btn btn-success mt-4 ml-5">Sign In </button>
+  
+  <div class="form-group p-3">
+    
+    <input type="text" name="Password" class="form-control  "  id="exampleInputPassword1"   placeholder="Password"style="width: 20rem;border-radius: .75rem;border-width: 2px">
+  </div>
+  
+  <button type="submit" class="btn btn-success  btn-lg mt-4 ml-5" style="width: 13rem;border-radius: 15px;">Sign In </button>
 </form>
       
     </div>

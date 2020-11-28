@@ -31,9 +31,9 @@ console.log(req.body.Password);
 }
 else{
   console.log('false');
-  
+  req.loginErr="Invalid usernameor password"
 /*  res.render('admin/else');*/
- res.redirect('/');
+ res.redirect('/admin/login');
 }
   
 

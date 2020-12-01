@@ -31,11 +31,11 @@
       <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>
       
 <br>
-      <form class="mr-5 p-4" action="/admin/login" method="post" style="width: 24rem;border-radius: .35rem">
+      <form class="mr-5 p-4 main-form" action="/admin/login" method="post" style="width: 24rem;border-radius: .35rem">
   <div class="form-group p-3" >
    
-    <input type="text" name="Name"  class="form-control "  placeholder="Username" style="width: 20rem;border-radius: .75rem;border-width: 2px">
-    
+    <input type="text" name="Name"  id="Name"  class="form-control is-invalid "  placeholder="Username" style="width: 20rem;border-radius: .75rem;border-width: 2px">
+    <div class="invalid-feedback">Incorrect Username</div>
   </div>
   
   

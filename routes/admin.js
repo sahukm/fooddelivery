@@ -22,6 +22,7 @@ router.get('/login', function(req, res, next) {
 router.post('/login',(req,res,next)=>{
   console.log('hi login')
   if((req.body.Name===adminDetais.Name) && (req.body.Password===adminDetais.Password)){
+    
 console.log('true');
 console.log(req.body.Name);
 console.log(req.body.Password);

@@ -8,12 +8,13 @@ var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
 var db=require('./config/connection')
-
+var hbs=require('express-handlebars')
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.engine('hbs',hbs({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/'}))
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,9 +26,9 @@ db.connect((err)=>{
   if(err) console.log("connection error"+err)
   else console.log("datbase connected to the port 27017")
 })
-app.use('/', indexRouter);
+/*app.use('/', indexRouter);*/
 
-/*app.use('/', adminRouter);*/
+app.use('/', usersRouter);
 app.use('/admin',adminRouter);
 app.use('/users', usersRouter);
 

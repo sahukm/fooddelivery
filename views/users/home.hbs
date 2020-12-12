@@ -27,6 +27,25 @@
         <a class="nav-link text-warning" href="#">Contact</a>
       </li>
     </ul>
+                 <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   {{#if user}}
+     {{user.Name}}
+    {{else}}
+    Account
+   {{/if}}
+    
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       {{#if user}}
+     <a class="dropdown-item" href="/logout">Logout</a>
+    {{else}}
+    <a class="dropdown-item" href="/login">Login</a>
+   {{/if}}
+    
+   
+  </div>
+</div>
   </div>
 </nav>
             </div>
@@ -34,10 +53,11 @@
                 <img style= " display: block;height:100%;
     width: 100%;
     max-width: 1600px; 
-    margin: 0 auto; "  src="https://www.bakersbaristas.com/wp-content/uploads/2019/12/fresh-muffins-collection.jpg">
+    margin: 0 auto; "  src="http://getwallpapers.com/wallpaper/full/8/2/0/818602-widescreen-bakery-wallpapers-3840x2160-for-iphone-7.jpg">
                  <h1>This is centered text.</h1>
             </div>
             <div class="main">main area</div>
+            
         </div>
     </div>
 </div>

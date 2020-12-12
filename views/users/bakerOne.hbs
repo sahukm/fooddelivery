@@ -1,29 +1,74 @@
 <section>
     <div style="width: 100%;height:480px;background-color:cornsilk">
         <section>
-             <section >
-                 <div class="row ">
-                     <div class="col-md-12 bg-light  p-2">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link active text-secondary btn btn-light mr-5" href="/users/login">Login<span class="sr-only">(current)</span></a>
-     <a class="nav-item nav-link active>c</a>
+        <div class="container mt-5">
+            <div class="row pl-5 ">
+                {{#each categoriestable}}
+                <div class="col-md-4  pl-5">
+               <p style="padding-left:3px;color: darkred; background-color:darkturquoise;width:6rem;">     {{this.name}}</p>
+                    </div>
+                {{/each}}
+
+                
+            </div>
+        </div>
+    </section>
+<div class="container">
+    
+
+    <hr >
     </div>
-  </div>
-</nav>
-<i class="fas fa-shopping-cart bg-info"></i>
+    <section>
+        <div class="container mt-5">
+            <div class="row pl-5">
+                {{#each products}}
+                <div class="col-md-4 pb-3 pl-3">
+                    <div class="card" style="width: 14rem;height: 20rem; background-color:white; border-color:gray;">
+                        <img class="card-img-top"
+                            src="/product-images/{{this._id}}.jpg"
+                            alt="Card image cap" 
+                            style="height: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.name}}</h5>
+                            
+                            <p class="ml-5">{{this.price}}</p>
+                            <div class="row">
+                            
+                            <button onclick="addToCart('{{this._id}}')" class="btn btn-primary">Add to cart</button>
+                        <button onclick="buynow('{{this._id}}')" class="btn btn-danger ml-2">Buy Now</button>
+                        </div>
+                        </div>
+                    </div>
 
-                     </div>
-                 </div>
-                 
 
-        </section>
+                </div>
+                {{/each}}
+
+                
+            </div>
+        </div>
+    </section>
+    <script>
+       
+
+    </script>
+
+
+
+   
+
+    <script>
+
+    </script>
+
+
+
+   
+
 
     </div>
 </section>
+<script>
+
+    </script>

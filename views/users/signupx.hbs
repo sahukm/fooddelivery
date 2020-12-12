@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+(function() {
+'use strict';
+window.addEventListener('load', function() {
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+var forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
+var validation = Array.prototype.filter.call(forms, function(form) {
+form.addEventListener('submit', function(event) {
+if (form.checkValidity() === false) {
+event.preventDefault();
+event.stopPropagation();
+}
+form.classList.add('was-validated');
+}, false);
+});
+}, false);
+})();
+
+    </script>
+</head>
+
+<body>
+
+    
+   <form class="needs-validation" novalidate>
+  <div class="form-col">
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom01">First name</label>
+      <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Fname"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom02">Last name</label>
+      <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Lname"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+    
+
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom02">User name</label>
+      <input type="text" class="form-control" id="validationCustom02" placeholder="User name" value="Username"
+        required>
+      
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        User name required!
+      </div>
+    </div>
+    
+
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom02">Email</label>
+      <input type="email" class="form-control" id="validationCustom02" placeholder="Email" value="Email"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        wrong email Id
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom02">Password</label>
+      <input type="text" class="form-control" id="validationCustom02" placeholder="password" value="password"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        password required!
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+      <label for="validationCustom02">Phone Number</label>
+      <input type="tel" class="form-control" id="validationCustom02" placeholder="Phone Number" value="phonenumber"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        wrong number!
+      </div>
+    </div>
+    
+
+</div>
+  
+  <button class="btn btn-primary btn-sm" type="submit">Submit form</button>
+</form> 
+</body>
+</html>

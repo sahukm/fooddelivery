@@ -1,0 +1,84 @@
+ <div id="main">
+ <body>
+ <section>
+                    <div class="row ">
+                        <div class="col-md-12 bg-secondary  p-2">
+
+                            <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+<h2 class="text-dark ml-2">Food Ordering App|Admin Login</h2>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                                    <div class="navbar-nav ml-auto">
+                                        <a class="nav-item nav-link active text-white"
+                                            href="/admin/logout">Logout</a>
+
+                                    </div>
+                                </div>
+                            </nav>
+
+
+
+                        </div>
+                    </div>
+                </section>
+
+                  <section>
+                             <div class="row  pl-2 mt-3 pt-4">
+                                  
+  
+                                    
+<a href="/admin/addCategory"   style="background-color: rgb(65, 8, 65); border-radius: 25px;"  class="btn text-white ml-4">Add Category</a>
+                                 </div>
+                             
+                         </section>
+                    
+                     <section class="mt-4">
+                         
+                         <div class="row mt-4 ">
+
+                             
+                                 
+                                   
+        <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Category Name</th>
+     
+      
+       
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each categories}}
+
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.name}}</td>
+      
+      
+   <td>
+      <a href="/admin/editCategory/{{this._id}}" class="btn btn-primary">Edit</a>
+     <a href="/admin/deleteCategory?id={{this._id}}&name=ezzah" class="btn btn-danger" onclick="return confirm('ar u sure want to delete  {{this.name}}?')">Delete</a>
+   
+ 
+   </td>
+    </tr>
+ {{/each}}
+ 
+  </tbody>
+</table>
+                            
+</div>
+                         </div>
+                     </section>
+
+
+
+                </body>
+</div>

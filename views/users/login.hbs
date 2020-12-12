@@ -31,7 +31,10 @@
       <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>
       
 <br>
-      <form class="mr-5 p-4" action="/admin/login" method="post" style="width: 24rem;border-radius: .35rem">
+      <form class="mr-5 p-4" action="/users/login" method="post" style="width: 24rem;border-radius: .35rem">
+      {{#if loginErr}}
+      <p class="error text-danger text-bold italics">Invalid username or Password</p>
+      {{/if}}
   <div class="form-group p-3" >
    
     <input type="text" name="Name"  class="form-control "  placeholder="Username" style="width: 20rem;border-radius: .75rem;border-width: 2px">
@@ -45,9 +48,9 @@
   </div>
   
   <button type="submit" class="btn btn-success  btn-lg mt-4 ml-5" style="width: 13rem;border-radius: 15px;">Sign In </button>
-  <a  class="text-center"  href="/signup"><p class="text-center ml-2">Don't have account ?Register</p>
+  <a  class="text-center"  href="/signup"><p class="text-center ml-2">Don't have account ?Register</a>
 </form>
-<p class="text-dark text-center">------or login with------</p>
+<p class="text-white bg-info text-bold text-center">login with OTP</p>
 <form class="p-4 mr-5">
       <div class="form-group p-4 mr-5" >
    
@@ -56,13 +59,16 @@
   </div>
   <p class="text-center">OTP</p>
   <div class="row pl-4">
-  <div class="col-md-12 pl-5">
+ 
+	
+<div class="col-md-3 pl-5">
+	
 	
 		<input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
 		<input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
 		<input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
 		<input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
-	</div>
+	
 </div>
     <button type="submit" class="btn btn-success  btn-lg mt-4 ml-5" style="width: 13rem;border-radius: 15px;">Sign In </button>
     

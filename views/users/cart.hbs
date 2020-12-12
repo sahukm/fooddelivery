@@ -1,0 +1,128 @@
+<section>
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-12" style="height: 20rem;width:100%;background-color:rgb(0, 217, 255);">
+                <div class="row">
+                    <div class="col-md-12">
+                <div>
+                    <div class="row">
+                <a class= "btn btn-danger  ml-3 mt-5" href="/bakerOne"  >Continue Shopping</a>
+                </div>
+
+                <div class="row mt-4   ">
+            
+                <h3 class="text-danger p-3">Total:Rs <span id="total">{{totalValue}}</span></h3>
+                <div class="float-right pr-5">
+    
+   
+
+    </div>
+
+                </div>
+                </div>
+                <div class="col-md-12">
+                <div>
+<div class="row pt-2">
+ 
+</div>
+<div class="row">
+   <a href="/users/place-order" class="mt-3 btn btn-success ml-auto" style="width:20rem;"><b>Place Order</b></a>
+                </div>
+                </div>
+                </div>
+                </div>
+              
+
+            </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-5" >
+            <div class="col-md-12" style="height: 70rem;width:100%;background-color:violet;">
+<section>
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Title</th>
+                     
+                     <th scope="col">Price</th>
+                      <th scope="col">Quantity</th>
+                      
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each products}}
+
+                <tr>
+                
+                    
+                    <td><img style="width:50px; height:50px;" src="/product-images/{{this.product._id}}.jpg" alt=""></td>
+
+                <td>{{this.product.name}}</td>
+                <td>Rs.{{this.product.price}}</td>
+                
+                
+                <td>
+                    <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
+                   <span id="{{this.product._id}}">{{this.quantity}}</span>
+                    <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button>
+                </td>
+                <td>
+                    <a href="" class="btn btn-danger">Remove</a>
+                </td>
+                </tr>
+                {{/each}}
+            </tbody>
+
+        </table>
+        <hr>
+
+</section>
+
+
+
+
+            </div>
+
+        </div>
+        
+
+
+
+
+
+
+    </div>
+</section>
+<script>
+    function changeQuantity(cartId,proId,userId,count){
+        let quantity=parseInt(document.getElementById(proId).innerHTML)
+        count=parseInt(count)
+        $.ajax({
+            url:'/change-product-quantity',
+            data:{
+                user:userId,
+                cart:cartId,
+                product:proId,
+                count:count,
+                quantity:quantity
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.removeProduct){
+                    alert("product removed from cart")
+                    location.reload()
+
+                }else{
+
+                    document.getElementById(proId).innerHTML=quantity+count
+                     document.getElementById('total').innerHTML=response.total
+                }
+            }
+        })
+    }
+</script>|

@@ -1,0 +1,87 @@
+<section>
+    <div class="container mt-5">
+        <form action="" method="post" id="ckeckout-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Enter delivery Details</h2><br>
+                    <div>
+
+                         <label for="">Name</label>
+                        <input class="form-control" type="text" id="name" name="name">
+
+                        <label for="">Address</label>
+                        <input class="form-control" type="text" id="address" name="address">
+
+                        <label for="">Email</label>
+                        <input class="form-control" type="email" id="email" name="email">
+
+                        <label for="">Mobile</label>
+                        <input class="form-control" type="text" id="mobile" name="mobile">
+                        
+                        <label for="">Date</label>
+                        <input class="form-control" type="date" id="date" name="date">
+
+                        <input type="text" name="userId" id="" value="{{user._id}}" hidden>
+
+                    </div>   
+                
+                </div>
+                <div class="col-md-4">
+                    <div class="container mt-5 ml-5 checkbox">
+                        <h5>Total Amount:Rs {{total}}</h5>
+                        <hr>
+                        <div class="payment"> 
+                            <p>Payment method</p>
+                            <label class="radio-inline ">
+                            <input type="radio" name="payment-method" value="COD" checked>COD
+                            </label>
+
+                            <label class="radio-inline mt-2">
+                            <input type="radio" name="payment-method" value="ONLINE" >Online-Payment
+                            </label>
+                            <button class="btn btn-primary float-right "  href="/users/order-success" type="submit">checkout</button>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </form>
+        
+    </div>
+</section>
+<script>
+    $('#checkout-form').submit((e)=>{
+        e.preventDefault()
+        $.ajax({
+            url:'/place-order',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(response)=>{
+                alert(response)
+                if(response.status)
+                {
+                    location.href:'/order-success'
+                }
+               
+    
+            }
+
+        })
+    })
+</script>
+
+<style>
+    input[type=radio]{
+        width: 20px;
+        height: 20px;
+    }
+    
+</style>

@@ -8,7 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    
+    <script>
+  function validateForm() {
+  var x = document.forms["myForm"]["Name"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+}
+</script>
   </head>
   <body>
     
@@ -31,11 +40,14 @@
       <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>
       
 <br>
-      <form class="mr-5 p-4 main-form" action="/admin/login" method="post" style="width: 24rem;border-radius: .35rem">
+      <form  name="myForm" class="mr-5 p-4 main-form" action="/admin/login" method="post" style="width: 24rem;border-radius: .35rem">
+{{#if loginErr}}
+      <p class="error text-danger text-bold italics">Invalid username or Password</p>
+      {{/if}}
   <div class="form-group p-3" >
    
-    <input type="text" name="Name"  id="Name"  class="form-control is-invalid "  placeholder="Username" style="width: 20rem;border-radius: .75rem;border-width: 2px">
-    <div class="invalid-feedback">Incorrect Username</div>
+    <input type="text" name="Name"   id="Name"  class="form-control "  placeholder="Username" style="width: 20rem;border-radius: .75rem;border-width: 2px">
+    
   </div>
   
   
@@ -50,6 +62,7 @@
     </div>
   </div>
 </section>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" 
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" 
+        crossorigin="anonymous"></script>
+<script src="jquery-mailchimp.min.js"></script>
+
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<script src="js/<a href="https://www.jqueryscript.net/tags.php?/Validation/">Validation</a>FormScript.js"></script>
+<script>
+    $('#form1').validate({
+  rules:{}
+});
+</script>
+
+</head>
+<body>
+    <form class="form-horizontal" id="form1">
+  <fieldset>
+    
+    <!-- Form Name -->
+    <legend>
+    <center>
+      My login form
+    </center>
+    </legend>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Email">Email</label>
+      <div class="col-md-3">
+        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+          <input id="Email" name="Email" type="text" placeholder="Enter Your Email" class="form-control input-md">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Password input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Password">Password</label>
+      <div class="col-md-3">
+        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+          <input id="password" name="password" type="password" placeholder="Enter Your Password" class="form-control input-md">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Password input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="ConfirmPassword">Confirm Password</label>
+      <div class="col-md-3">
+        <div class="input-group"> <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+          <input id="password_again" name="password_again" type="password" placeholder="Enter Your Password Again" class="form-control input-md">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="Submit"></label>
+      <div class="col-md-4">
+        <button id="Submit" class="btn btn-success" type="Submit">Press To Validate</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+    
+</body>
+</html>

@@ -1,5 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+(function() {
+'use strict';
+window.addEventListener('load', function() {
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+var forms = document.getElementsByClassName('needs-validation');
+// Loop over them and prevent submission
+var validation = Array.prototype.filter.call(forms, function(form) {
+form.addEventListener('submit', function(event) {
+if (form.checkValidity() === false) {
+event.preventDefault();
+event.stopPropagation();
+}
+form.classList.add('was-validated');
+}, false);
+});
+}, false);
+})();
+
+    </script>
+</head>
+
+<body>
 <section>
-    <div style="width: 100%;height:450px;background:cornsilk">
+    <div style="width: 100%;height:900px;background:cornsilk">
         <div class="row">
             <div class="col-md-8">
                 <div class = "row text-center" style="">
@@ -25,61 +55,91 @@
         <br>
 
          
-         <form class="mr-5  pl-5 main-form" action="/users/signup" method="post" style="width: 24rem;border-radius: .35rem">
-  <div class="form-group p-1" >
-   
-    <input type="text" name="Fname"  id="Fname"    placeholder="Firstname" 
-    style="width: 20rem; border: none;
-  border-bottom: 2px solid gray; border-width:2px;">
+         
+  <form class="needs-validation mt-4" action="/users/signup" method="post" novalidate>
+  <div class="form-col">
+    <div class="col-md-4 mb-3">
+      
+      <input type="text" class="form-control"  style="width: 20rem; border: none;
+  border-bottom: 2px solid gray; border-width:2px;" id="validationCustom01" name="Fname" placeholder="First name" value="Fname"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
     
-  </div>
-  <div class="form-group p-1" >
-   
-    <input type="text" name="Lname"  id="Lname"    placeholder="Lastname" 
-    style="width: 20rem; border: none;
-  border-bottom: 2px solid gray; border-width:2px;">
+    <div class="col-md-4 mb-3">
+      
+      <input type="text" class="form-control"   style="width: 20rem; border: none;
+  border-bottom: 2px solid gray; border-width:2px;" id="validationCustom02"   name="Lname" placeholder="Last name" value="Lname"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
     
-  </div>
-  
-  
-  
-  
-  <div class="form-group p-1" >
-   
-    <input type="text" name="Name"  id="Name"    placeholder="Username" 
-    style="width: 20rem; border: none;
-  border-bottom: 2px solid gray; border-width:2px;">
-    
-  </div>
-  
-  
-  <div class="form-group p-1">
-    
-    <input type="text" name="Password" class="form-control  "  id="exampleInputPassword1"   placeholder="Password"style="width: 20rem;
-    border-width: 2px;border:none; border-bottom: 2px solid gray;">
-  </div>
 
-  <div class="form-group p-1" >
-   
-    <input type="text" name="Name"  id="Name"    placeholder="Username" 
-    style="width: 20rem; border: none;
-  border-bottom: 2px solid gray; border-width:2px;">
+    <div class="col-md-4 mb-3">
+      
+      <input type="text" class="form-control"  style="width: 20rem; border: none;
+  border-bottom: 2px solid gray; border-width:2px;" id="validationCustom02"  name="Name"  placeholder="User name" value="Username"
+        required>
+      
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        name required
+      </div>
+    </div>
     
-  </div>
-  <div class="form-group p-1" >
-   
-    <input type="text" name="Name"  id="Name"    placeholder="Username" 
-    style="width: 20rem; border: none;
-  border-bottom: 2px solid gray; border-width:2px;">
+
+    <div class="col-md-4 mb-3">
+      
+      <input type="email" class="form-control"  style="width: 20rem; border: none;
+  border-bottom: 2px solid gray; border-width:2px;" id="validationCustom02" placeholder="Email" name="Email"   value="Email"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        wrong email Id
+      </div>
+    </div>
     
-  </div>
-  <div class="form-group p-1" >
-   
-    <input type="text" name="Name"  id="Name"    placeholder="Username" 
-    style="width: 20rem; border: none;
-  border-bottom: 2px solid gray; border-width:2px;">
+    <div class="col-md-4 mb-3">
+      
+      <input type="text" class="form-control"  style="width: 20rem; border: none;
+  border-bottom: 2px solid gray; border-width:2px;" id="validationCustom02" name="Password"    placeholder="password" value="password"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        password required!
+      </div>
+    </div>
     
-  </div>
+    <div class="col-md-4 mb-3" >
+      
+      <input  type="tel"  style="width: 20rem; border: none;
+  border-bottom: 2px solid gray; border-width:2px;" class="form-control" name="phonenumber" id="validationCustom02" placeholder="Phone Number" value="phonenumber"
+        required>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+      <div class="invalid-feedback">
+        wrong number!
+      </div>
+    </div>
+    
+
+</div>
+  
+
+
+  
+  
   
   <button type="submit" class="btn btn-success  btn-lg mt-1 ml-5" style="width: 13rem;border-radius: 15px;">Sign Up </button>
 </form>
@@ -89,3 +149,5 @@
 
     </div>
 </section>
+</body>
+</html>

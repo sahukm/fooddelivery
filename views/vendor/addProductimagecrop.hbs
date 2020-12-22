@@ -1,0 +1,53 @@
+<div id="main">
+   <span style="font-size:30px;cursor:pointer;color:crimson" onclick="openNav()">&#9776; Admin Dashboard</span>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">Add Product</h2>
+<form action="/vendor/addProduct" method="post" enctype="multipart/form-data" >
+  <div class="form-group">
+    <label for="">Name</label>
+    <input type="text" class="form-control" name="name">
+    
+  </div>
+    <div class="form-group">
+    <label for="">Category</label>
+    
+    <input type="text" class="form-control" name="category">
+    
+  </div>
+ 
+  <div class="form-group">
+    <label for="">price</label>
+    <input type="number" class="form-control" name="price">
+  </div>
+ 
+  
+  
+<div class="form-group">
+      <img src="/product-images/crop-images/{{product._id}}.jpg" alt="" style="width:400px;height:400px;" id="imgView">
+    <label for="">Image</label>
+    <input type="file" class="form-control" name="image" onchange="viewImage(event)">
+  </div>
+  <button type="submit" class="btn btn-success mt-4">Submit</button>
+</form>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<script>
+  function viewImage(event){
+    document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+  }
+</script>

@@ -12,3 +12,14 @@ function addToCart(proId){
         }
     })
 }
+/*function buynow(proId){
+    $.ajax({
+        url:'users/place-order/'+proId,
+        method:'post',
+        success:(response)=>{
+            
+            }
+            
+        }
+    })
+}*/

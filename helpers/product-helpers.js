@@ -14,11 +14,25 @@ module.exports={
             /*console.log(data*/
             callback(data.ops[0]._id)
         })
+
     },
+
+    
     getAllproducts:()=>{
         return new Promise(async(resolve,reject)=>{
             let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
             resolve(products)
+        })
+    },
+    getVendorAllProducts:(vendor)=>{
+        
+        return new Promise(async(resolve,reject)=>{
+            
+            let vendorProducts=await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find({shopname:vendor.shopname}).toArray()
+            resolve(vendorProducts)
+            console.log("hivend productsssss")
+            console.log(vendorProducts);
         })
     },
 

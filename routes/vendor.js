@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var productHelpers=require('../helpers/product-helpers')
 var userHelpers=require('../helpers/user-helpers')
+var vendorHelpers=require('../helpers/vendor-helpers')
 /* GET home page. */
 let vendorDetais={
     Name:"shinu",
@@ -11,9 +12,35 @@ router.get('/', function(req, res, next) {
   res.render('vendor/login', { title: 'Express' });
 });
 
-router.post('/login',(req,res,next)=>{
+
+router.post('/login',(req,res)=>{
+  console.log('hi login')
+    vendorHelpers.doLogin(req.body).then((response)=>{
+      if(response.status){
+        console.log("true vendor");
+        req.session.vendorloggedIn=true
+        req.session.vendor=response.vendor
+      
+    
+        res.render('vendor/home',{vendor:true,vendor:req.session.vendor})
+        
+      }else{
+        console.log("false vendor");
+        req.session.loginErr="Invalid username or password"
+      
+        req.session.loginErr="Invalid username or password"
+        res.render('vendor/login',{"loginErr":req.session.loginErr})
+        req.session.loginErr=false
+        
+      }
+    })
+  
+  })
+/*router.post('/login',(req,res,next)=>{
     console.log('hi login vendor')
     if((req.body.Name===vendorDetais.Name) && (req.body.Password===vendorDetais.Password)){
+      req.session.vendorloggedIn=true
+
       
   console.log('true');
   console.log(req.body.Name);
@@ -26,7 +53,7 @@ router.post('/login',(req,res,next)=>{
     console.log(req.body.Password);
     console.log('false');
     
-   /*res.render('admin/else');*/
+   
    req.session.loginErr="Invalid username or password"
    res.render('vendor/login',{"loginErr":req.session.loginErr})
    req.session.loginErr=false
@@ -34,21 +61,23 @@ router.post('/login',(req,res,next)=>{
   }
     
   
-  })
+  })*/
   router.get('/logout',(req,res)=>{
     res.render('vendor/login')
     /*res.redirect('login');*/
     /*res.render('admin/login')*/
   })
   router.get('/home',(req,res)=>{
-    res.render('vendor/home',{vendor:true})
+    res.render('vendor/home',{vendor:true  ,vendor:req.session.vendor})
+    console.log(vendor);
+    console.log("hi vendor");
     /*res.redirect('login');*/
     /*res.render('admin/login')*/
   })
   router.get('/productManagement',(req,res)=>{
 
     productHelpers.getAllproducts().then((products)=>{
-      res.render('vendor/productManagement',{vendor:true,products})
+      res.render('vendor/productManagement',{vendor:true,products,vendor:req.session.vendor})
 
     })
     
@@ -56,7 +85,7 @@ router.post('/login',(req,res,next)=>{
     /*res.render('admin/login')*/
   })
   router.get('/addProduct',(req,res)=>{
-    res.render('vendor/addProduct',{vendor:true})
+    res.render('vendor/addProduct',{vendor:true,vendor:req.session.vendor})
     /*res.redirect('login');*/
     /*res.render('admin/login')*/
   })
@@ -68,7 +97,7 @@ router.post('/login',(req,res,next)=>{
       console.log(id)
       image.mv('./public/product-images/'+id+'.jpg',(err)=>{
         if(!err){
-          res.render("vendor/addProduct",{vendor:true})
+          res.render("vendor/addProduct",{vendor:true,vendor:req.session.vendor})
         }else{
           console.log(err)
         }
@@ -78,14 +107,29 @@ router.post('/login',(req,res,next)=>{
     })
     router.get('/orderManagement',async(req,res)=>{
       let orders=await userHelpers.getUserOrders(req.session.user._id)
-      res.render('vendor/orderManagement',{vendor:true,orders})
+      res.render('vendor/orderManagement',{vendor:true,orders,vendor:req.session.vendor})
       /*res.redirect('login');*/
       /*res.render('admin/login')*/
     })
     router.get('/editProduct/:id',async (req,res)=>{
       let product=await productHelpers.getProductDetails(req.params.id)
       console.log(product);
-      res.render('vendor/editProduct',{product})
+      res.render('vendor/editProduct',{product,vendor:req.session.vendor,vendor:true})
+      
+    })
+    router.get('/salesReport',async(req,res)=>{
+      console.log("hi sales");
+      console.log(req.body);
+      console.log("hi sales above");
+      let vendorProducts=await productHelpers.getVendorAllProducts(req.session.vendor)
+      res.render('vendor/salesReport',{vendor:true,orders,vendor:req.session.vendor})
+      /*res.redirect('login');*/ 
+      /*res.render('admin/login')*/
+    })
+    router.get('/editProduct/:id',async (req,res)=>{
+      let product=await productHelpers.getProductDetails(req.params.id)
+      console.log(product);
+      res.render('vendor/editProduct',{product,vendor:req.session.vendor,vendor:true})
       
     })
 

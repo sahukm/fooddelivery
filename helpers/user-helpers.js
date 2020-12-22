@@ -3,9 +3,12 @@ var collection=require('../config/collections')
 const bcrypt=require('bcrypt')
 const { response } = require("express")
 var objectId=require('mongodb').ObjectId
-
-
-
+const Razorpay=require('razorpay')
+var instance = new Razorpay({
+    key_id: 'rzp_test_TZdDL7Szmwn5In',
+    key_secret: 'JuOfBkWxquL7P7GejkFot9Gt'
+  });
+  
 
 
 module.exports={
@@ -278,13 +281,117 @@ placeOrder:(order,products,total)=>{
         }
         db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
             db.get().collection(collection.CART_COLLECTION).removeOne({user:objectId(order.userId)})
-            resolve()
+            resolve(response.ops[0]._id)
         })
 
     })
 
 
 },
+
+adduser:(user,callback)=>{
+    console.log(user)
+    db.get().collection('user').insertOne(user).then((data)=>{
+        /*console.log(data*/
+        callback(data.ops[0]._id)
+    })
+},
+getAllusers:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let users=await db.get().collection(collection.USER_COLLECTION).find().toArray()
+        resolve(users)
+    })
+},
+
+deleteUser:(useId)=>{
+    return new Promise ((resolve,reject)=>{
+        db.get().collection(collection.USER_COLLECTION).removeOne({_id:objectId(useId)}).then((response)=>{
+           console.log(response);
+            resolve(response)
+
+        })
+    })
+},
+
+getUserDetails:(useId)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(useId)}).then((user)=>{
+            resolve(user)
+        })
+    })
+},
+updateUser:(useId,useDetails)=>{
+    return new Promise((resolve,reject)=>{
+
+        db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(useId)},{
+            $set:{
+                Name:useDetails.Name,
+                
+                Email:useDetails.Email,
+                
+                phonenumber:useDetails.phonenumber
+            
+            }
+        }).then((response)=>{
+            resolve()
+        })
+    })
+}
+,
+
+addVendor:(vendor,callback)=>{
+    console.log(vendor)
+    db.get().collection('vendor').insertOne(vendor).then((data)=>{
+        /*console.log(data*/
+        callback(data.ops[0]._id)
+    })
+},
+getAllvendors:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let vendors=await db.get().collection(collection.VENDOR_COLLECTION).find().toArray()
+        resolve(vendors)
+    })
+},
+
+deleteVendor:(venId)=>{
+    return new Promise ((resolve,reject)=>{
+        db.get().collection(collection.VENDOR_COLLECTION).removeOne({_id:objectId(venId)}).then((response)=>{
+           console.log(response);
+            resolve(response)
+
+        })
+    })
+},
+
+blockUser:(useId)=>{
+    return new Promise ((resolve,reject)=>{
+        let 
+    })
+},
+
+getVendorDetails:(venId)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.VENDOR_COLLECTION).findOne({_id:objectId(venId)}).then((vendor)=>{
+            resolve(vendor)
+        })
+    })
+},
+updateVendor:(venId,venDetails)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.VENDOR_COLLECTION).updateOne({_id:objectId(venId)},{
+            $set:{
+                name:venDetails.name,
+                
+                shopname:venDetails.shopname,
+            
+            }
+        }).then((response)=>{
+            resolve()
+        })
+    })
+}
+
+,
 getUserOrders:(userId)=>{
 
     return new Promise(async(resolve,reject)=>{
@@ -357,6 +464,27 @@ getCartProductList:(userId)=>{
         resolve(cart.products)
     })
 }
+,
+generateRazorpay:(orderId,total)=>{
+    console.log(orderId);
+    return new Promise((resolve,reject)=>{
 
+        var options = {
+            amount: total,  // amount in the smallest currency unit
+            currency: "INR",
+            receipt: ""+orderId
+          };
+          instance.orders.create(options, function(err, order) {
+              if(err){
+                  console.log(err);
+              }else{
+            console.log( "New order :" ,order);
+
+            resolve(order)}
+          });
+        
+        
+    })
+}
 
 }

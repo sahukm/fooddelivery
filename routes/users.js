@@ -1,9 +1,20 @@
+require('dotenv/config')
 var express = require('express');
+
+var router = express.Router()
+
+
+var TWILIO_TOKEN = "d7b2968a7463da47aea8a62ff1b5da0c";
+var TWILIO_ACCOUNT_SID = "ACbe4bbbbbe3b74b9ddc91bede57011afe";
+var client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_TOKEN);
+
+
 /*const otp=require('../config/otp')
-const client=require("twilio")(otp.accountSID,otp.authToken)*/
+require('dotenv/config')
+const client=require("twilio")(otp.accountID,otp.authToken)*/
 
 const { render }=require('../app');
-var router = express.Router();
+
 var userHelpers=require('../helpers/user-helpers')
 var router = express.Router();
 var productHelpers=require('../helpers/product-helpers')
@@ -15,7 +26,7 @@ var categoryHelpers=require('../helpers/category-helpers')
 
 
 const veryfyLogin=(req,res,next)=>{
-  if(req.session.loggedIn)
+  if(req.session.loggedIn && req.session.unBlock) 
   {
     next()
   }
@@ -24,6 +35,8 @@ const veryfyLogin=(req,res,next)=>{
   }
 }
 router.get('/', async function(req, res, next) {
+  console.log(req.session.unBlock);
+  console.log("hi unblock checking");
   let user=req.session.user
   let cartCount=null
   if(req.session.user){
@@ -39,7 +52,7 @@ router.get('/home', function(req, res, next) {
   res.render('users/home', { user});
 });
 
-router.get('/bakerOne', async function(req, res, next) {
+router.get('/bakerOne',veryfyLogin,async function(req, res, next) {
   let categoriestable=null
   let cartCount=null
   let user=req.session.user
@@ -123,7 +136,7 @@ router.post('/signup', async(req,res)=>{
 
 
 router.post('/login',(req,res)=>{
-  console.log('hi login')
+console.log('hi login')
   userHelpers.doLogin(req.body).then((response)=>{
     if(response.status){
       console.log("true user");
@@ -142,6 +155,7 @@ router.post('/login',(req,res)=>{
 })
 
 
+
 router.post('/change-product-quantity',(req,res,next)=>{
   userHelpers.changeProductQuantity(req.body).then(async(response)=>{
     response.total=await userHelpers.getTotalAmount(req.session.user._id)
@@ -153,7 +167,7 @@ router.get('/order-success', (req, res) =>{
   res.render('users/order-success', {user:req.session.user});
 });
 router.get('/orders', async(req, res) =>{
-  let orders=await userHelpers.getUserOrders(req.session.user._id)
+    let orders=await userHelpers.getUserOrders(req.session.user._id)
   res.render('users/orders', {user:req.session.user,orders});
 });
 router.get('/view-order-products/:id', async(req, res) =>{
@@ -161,12 +175,18 @@ router.get('/view-order-products/:id', async(req, res) =>{
   res.render('users/view-order-products', {user:req.session.user,products});
 });
 
-router.get('/place-order', veryfyLogin,async(req,res)=>{
+router.get('/place-order',async(req,res)=>{
   console.log('hiii  place order design')
   
    let total=await userHelpers.getTotalAmount(req.session.user._id)
     res.render('users/place-order',{total,user:req.session.user})
   })
+  router.get('/place-order/:id', veryfyLogin,async(req,res)=>{
+    console.log('hiii  place order design')
+    
+     let total=await userHelpers.getTotalAmount(req.session.user._id)
+      res.render('users/place-order',{total,user:req.session.user})
+    })
  /* router.post('/place-order',(req,res)=>{
     console.log("hi place order post");
     console.log(req.body);
@@ -174,36 +194,49 @@ router.get('/place-order', veryfyLogin,async(req,res)=>{
   router.post('/place-order',async(req,res)=>{
     let products=await userHelpers.getCartProductList(req.body.userId)
     let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
-    userHelpers.placeOrder(req.body,products,totalPrice).then((response)=>{
-      res.json({status:true})
+    userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
+      if(req.body['payment-method']=='COD'){
+        res.render('users/order-success')
+        /*res.json({codSuccess:true})*/
+
+      }else{
+        userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
+          res.json(response)
+        })
+      }
+      
 
     })
 
     
     console.log(req.body);
+
+  })
+  router.get('/otpLoginform',(req,res)=>{
+    res.render("users/otpLoginform")
   })
 
-  /*router.get('/login', (req,res) => {
-    if (req.query.phonenumber) {
+  router.get('/otpLogin', (req,res) => {
+    if (req.body.phonenumber) {
        client
        .verify
-       .services(process.env.SERVICE_ID)
+       .services(otp.serviceId)
        .verifications
        .create({
-           to: `+${req.query.phonenumber}`,
-           channel: req.query.channel==='call' ? 'call' : 'sms' 
+           to: req.body.phonenumber,
+           channel: req.body.channel
        })
        .then(data => {
            res.status(200).send({
                message: "Verification is sent!!",
-               phonenumber: req.query.phonenumber,
+               phonenumber: req.body.phonenumber,
                data
            })
        }) 
     } else {
        res.status(400).send({
            message: "Wrong phone number :(",
-           phonenumber: req.query.phonenumber,
+           phonenumber: req.body.phonenumber,
            data
        })
     }
@@ -233,6 +266,11 @@ router.get('/verify', (req, res) => {
           data
       })
   }
-})*/
-  
+})
+
+
+
+router.post('verify-payment',(req,res)=>{
+    console.log(req.body);
+  })
 module.exports = router;

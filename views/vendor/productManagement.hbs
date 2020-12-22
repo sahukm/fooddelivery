@@ -20,9 +20,26 @@
                                 </button>
                                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                     <div class="navbar-nav ml-auto">
-                                        <a class="nav-item nav-link active text-white"
-                                            href="/vendor/logout">Logout</a>
-
+                                        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   {{#if vendor}}
+     {{vendor.Name}}
+    {{else}}
+    Account
+   {{/if}}
+    
+  </button>
+  <div class="dropdown-menu  ml-auto" aria-labelledby="dropdownMenuButton">
+       {{#if vendor}}
+     <a class="dropdown-item" href="/vendor/logout">Logout</a>
+    {{else}}
+    <a class="dropdown-item" href="/vendor/login">Login</a>
+   {{/if}}
+    
+   
+  </div>
+</div>
+                           
                                     </div>
                                 </div>
                             </nav>
@@ -66,7 +83,6 @@
   </thead>
   <tbody>
     {{#each products}}
-
     <tr>
       <th scope="row">1</th>
       <td>{{this.name}}</td>

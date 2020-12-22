@@ -9,7 +9,9 @@
     "bcrypt": "^5.0.0",
     "chart.js": "^2.9.4",
     "cookie-parser": "~1.4.4",
+    "croppie": "^2.6.5",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "express-handlebars": "^5.2.0",
@@ -17,8 +19,15 @@
     "fileupload": "^1.0.0",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
+    "jquery": "^3.5.1",
+    "messagebird": "^3.5.0",
     "mongodb": "^3.6.3",
     "morgan": "~1.9.1",
+    "razorpay": "^2.0.6",
+    "sharp": "^0.26.3",
     "twilio": "^3.54.0"
+  },
+  "devDependencies": {
+    "install-peers": "^1.0.3"
   }
 }

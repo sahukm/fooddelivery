@@ -61,6 +61,7 @@
       <th scope="col">Date</th>
       
       <th scope="col">Status</th>
+       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -71,6 +72,12 @@
       <td>{{this.deliveryDetails.name}}</td>
       <td>{{this.date}}</td>
       <td>{{this.status}}</td>
+      <td>
+         <a href="/vendor/delivered/{{this._id}}" class="btn btn-success">Delivered</a>
+          <a href="/vendor/cancelled/{{this._id}}" class="btn btn-danger">Cancelled</a>
+            
+            
+      </td>
       
       
       

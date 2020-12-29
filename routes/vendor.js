@@ -77,7 +77,7 @@ router.post('/login',(req,res)=>{
   router.get('/productManagement',(req,res)=>{
 
     productHelpers.getAllproducts().then((products)=>{
-      res.render('vendor/productManagement',{vendor:true,products,vendor:req.session.vendor})
+      res.render('vendor/productManagement',{vendor:true,products})
 
     })
     
@@ -89,6 +89,29 @@ router.post('/login',(req,res)=>{
     /*res.redirect('login');*/
     /*res.render('admin/login')*/
   })
+
+  router.get('/delivered/:id', (req, res) => {
+    console.log("hi deliver router");
+    console.log(req.params.id);
+    console.log("Success fully delivered");
+    userHelpers.changePaymentStatus(req.params.id).then(()=>{
+      console.log("hi user help");
+     
+    
+   })
+  })
+
+  router.get('/cancelled/:id', (req, res) => {
+    console.log("hi deliver router cancel");
+    console.log(req.params.id);
+    console.log("Success fully cancelled");
+    userHelpers.changePaymentStatusCancel(req.params.id).then(()=>{
+      console.log("hi user help cancell");
+     
+    
+   })
+  })
+  
   router.post('/addProduct',(req,res)=>{
     /*console.log(req.body)*/
    /* console.log(req.files.image)*/
@@ -111,6 +134,12 @@ router.post('/login',(req,res)=>{
       /*res.redirect('login');*/
       /*res.render('admin/login')*/
     })
+    router.get('/orderHistory',async(req,res)=>{
+      let orders=await userHelpers.getUserOrders(req.session.user._id)
+      res.render('vendor/orderHistory',{vendor:true,orders,vendor:req.session.vendor})
+      /*res.redirect('login');*/
+      /*res.render('admin/login')*/
+    })
     router.get('/editProduct/:id',async (req,res)=>{
       let product=await productHelpers.getProductDetails(req.params.id)
       console.log(product);
@@ -121,8 +150,13 @@ router.post('/login',(req,res)=>{
       console.log("hi sales");
       console.log(req.body);
       console.log("hi sales above");
-      let vendorProducts=await productHelpers.getVendorAllProducts(req.session.vendor)
+      /*let vendorProducts=await productHelpers.getVendorAllProducts(req.session.vendor)*/
+      let orders=await userHelpers.getUserOrders(req.session.user._id)
+      console.log(orders);
+      console.log("hi new orders");
+
       res.render('vendor/salesReport',{vendor:true,orders,vendor:req.session.vendor})
+      console.log("hi after sales");
       /*res.redirect('login');*/ 
       /*res.render('admin/login')*/
     })

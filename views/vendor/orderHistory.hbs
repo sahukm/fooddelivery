@@ -54,23 +54,24 @@
   <thead>
     <tr>
       <th scope="col">Order ID</th>
-      <th scope="col">Customer Name</th>
+      <th scope="col">Product Name</th>
      
       
        
       <th scope="col">Date</th>
       
-      <th scope="col">Status</th>
+      <th scope="col">Quantity</th>
     </tr>
   </thead>
   <tbody>
     {{#each orders}}
 
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{this._id}}</th>
+      
       <td>{{this.deliveryDetails.name}}</td>
       <td>{{this.date}}</td>
-      <td>{{this.status}}</td>
+      <td>{{this.}}</td>
       
       
       

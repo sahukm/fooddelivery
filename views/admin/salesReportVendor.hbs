@@ -51,11 +51,14 @@
     </tr>
   </thead>
   <tbody>
-    {{#each venSailedProducts}}
+    {{#each orders}}
 
     <tr>
-      <th scope="row">1</th>
-      <td>{{this.deliveryDetails.name}}</td>
+      <th scope="row">{{this._id}}</th>
+      <td>{{this.products.item}}</td>
+       <td>{{this.products.quantity}}</td>
+       <td>{{this.amount}}</td>
+  <td>{{this.paymentMethod}}</td>
       <td>{{this.date}}</td>
       <td>{{this.status}}</td>
       

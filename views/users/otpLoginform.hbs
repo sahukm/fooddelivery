@@ -56,7 +56,7 @@ form.classList.add('was-validated');
 
          
          
-  <form class="needs-validation mt-4" action="/users/otpLogin" method="post" novalidate>
+  <form class="needs-validation mt-4"  novalidate>
   <div class="form-col">
    <p class="text-white text-center bg-info"> Enter your mobile number for sending otp</p>
     
@@ -94,5 +94,28 @@ form.classList.add('was-validated');
 
     </div>
 </section>
+<script>
+     $("#checkout-form").submit((e)=>{
+        e.preventDefault()
+        $.ajax({
+            url:'/otpLoginform',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(response)=>{
+                alert(response.message)
+               if(response.message=="success")
+            { 
+               
+                location.href='/otpverify'
+            }else{
+                location.href='/otpLogin'
+        
+
+            }
+            }
+        })
+    })
+</script>
+
 </body>
 </html>

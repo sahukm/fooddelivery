@@ -4,6 +4,7 @@ const bcrypt=require('bcrypt')
 const { response } = require("express")
 var objectId=require('mongodb').ObjectId
 const Razorpay=require('razorpay')
+const { resolve } = require("path")
 var instance = new Razorpay({
     key_id: 'rzp_test_TZdDL7Szmwn5In',
     key_secret: 'JuOfBkWxquL7P7GejkFot9Gt'
@@ -57,6 +58,7 @@ doLogin:(userData)=>{
 addtoCart:(proId,userId)=>{
     let proObj={
         item:objectId(proId),
+    
         quantity:1
     }
    
@@ -98,6 +100,43 @@ addtoCart:(proId,userId)=>{
         }
     })
 } ,
+removeProduct:(details)=>{
+    console.log("reached user helpers");
+    console.log(details);
+    console.log("after detais");
+return new Promise(async(resolve,reject)=>{   
+    let userCart=await db.get().collection(collection.CART_COLLECTION).
+    findOne({user:objectId(details.user)})
+    
+    console.log("hi usr cart");
+    console.log(userCart);
+    console.log("prod array..");
+    console.log(userCart.products);
+    
+    if(userCart)
+    {
+        let isExistingProduct=userCart.products.findIndex(product=>product.item==details.product)
+        console.log(isExistingProduct);
+    if(isExistingProduct>=0){
+
+      let newProductsArray=  userCart.products.splice(isExistingProduct, 1);
+    
+
+     console.log("after splice..");
+     console.log(newProductsArray);
+      /*db.get().collection(collection.CART_COLLECTION).update({'products':userCart.products},
+      {$set:{'products':newProductsArray}}).then((response)=>{
+            console.log(response);
+             resolve(response)
+    
+         })*/
+
+
+    }
+}
+})
+},
+
 getCartProducts:(userId)=>{
     return new Promise(async(resolve,reject)=>{
         let cartItems=await db.get().collection(collection.CART_COLLECTION).aggregate([
@@ -162,7 +201,8 @@ getCartCount:(userId)=>{
     })
 },
 changeProductQuantity:(details)=>{
-
+    console.log("hi change Product ....");
+console.log(details);
     details.count=parseInt(details.count)
     details.quantity=parseInt(details.quantity)
 
@@ -282,6 +322,7 @@ placeOrder:(order,products,total)=>{
         db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
             db.get().collection(collection.CART_COLLECTION).removeOne({user:objectId(order.userId)})
             resolve(response.ops[0]._id)
+          /* resolve()*/
         })
 
     })
@@ -400,6 +441,15 @@ getUserOrders:(userId)=>{
         console.log(orders);
         resolve(orders)
     })
+},
+getVendorOrders:(vendorId)=>{
+
+    return new Promise(async(resolve,reject)=>{
+        console.log(vendorId);
+        let orders=await db.get().collection(collection.ORDER_COLLECTION).find({userId:objectId(userId)}).toArray()
+        console.log(orders);
+        resolve(orders)
+    })
 }
 ,
 getOrderProducts:(orderId)=>{
@@ -451,7 +501,8 @@ getOrderProducts:(orderId)=>{
             }*/
 
         ]).toArray()
-        console.log(orderItems);
+        console.log("hi userhelper order");
+        console.log(orderItems[0].products);
         resolve(orderItems)
     })
 },
@@ -470,7 +521,7 @@ generateRazorpay:(orderId,total)=>{
     return new Promise((resolve,reject)=>{
 
         var options = {
-            amount: total,  // amount in the smallest currency unit
+            amount: total*100,  // amount in the smallest currency unit
             currency: "INR",
             receipt: ""+orderId
           };
@@ -485,6 +536,56 @@ generateRazorpay:(orderId,total)=>{
         
         
     })
+},
+verifyPayment:(details)=>{
+    return new Promise((resolve,reject)=>{
+        const crypto=require('crypto');
+        let hmac=crypto.createHmac('sha256','JuOfBkWxquL7P7GejkFot9Gt')
+        hmac.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]'])
+        hmac=hmac.digest('hex')
+        if(hmac==details['payment[razorpay_signature]']){
+            resolve()
+        }else{
+            reject()
+        }
+
+    })
+},
+changePaymentStatus:(orderId)=>{
+    console.log("payment status");
+    console.log(orderId);
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.ORDER_COLLECTION)
+        .updateOne({_id:objectId(orderId)},
+        {
+            $set:{
+                status:'placed'
+            }
+        }
+        ).then(()=>{
+            resolve()
+            
+        })
+    })
+},
+changePaymentStatusCancel:(orderId)=>{
+    console.log(orderId);
+    console.log("cancell");
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.ORDER_COLLECTION)
+        .updateOne({_id:objectId(orderId)},
+        {
+            $set:{
+                status:'Cancelled'
+            }
+        }
+        ).then(()=>{
+            resolve()
+            
+        })
+    })
 }
+
+
 
 }

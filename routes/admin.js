@@ -295,27 +295,29 @@ router.get('/salesReportVendor/:id', async (req, res) => {
 });
 
 router.get('/blockUser/:id', (req, res) => {
+  console.log(req.session)
   let userId = ObjectID(req.params.id)
   console.log("hi block");
 
   req.session.unBlock = false
 
 
-  res.redirect('/admin/userManagement')
+  
 
 
 
-  console.log(req.session.unBlock)
+ 
 
 
 
 })
 router.get('/unblockUser/:id', (req, res) => {
+  console.log(req.session)
   let userId = ObjectID(req.params.id)
 
   console.log(userId);
   req.session.unBlock = true
-  res.redirect('/admin/userManagement')
+
 
 
   console.log(req.session.unBlock)

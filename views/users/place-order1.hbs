@@ -60,28 +60,64 @@
 
 
 <script>
-    $("#checkout-form").submit((e)=>{
-        e.preventDefault()
-        $.ajax({
-            url:'/place-order',
-            method:'post',
-            data:$('#checkout-form').serialize(),
-            success:(response)=>{
-                alert(response)
-               if(response.codeSuccess)
+function checkOut(){
+    console.log("hi  new function")
+}*/
+    
+$("#checkout-form").submit((e)=>{
+     e.preventDefault()
+    /*console.log("hi checkout ajaxxxxxxx")
+    $.ajax({
+        url:'/place-order',
+        method:'post',
+        data:$('#checkout-form').serialize(),
+        success:(response)=>{
+            alert(response)
+            if(response.status)
             { console.log("hi ajax if")
-               
+               console.log(response.codSuccess)
+                location.href='/order-success'
+            }/*else{
+                razorpayPayment(response)
+        
+
+            }
+
+
+           
+
+        }
+
+    })*/
+
+})
+
+
+   
+   /* $.ajax({
+        url:'/place-order',
+        method:'post',
+        data:$('#checkout-form').serialize(),
+        success:(response)=>{
+            alert(response)
+            if(response.codSuccess)
+            {   console.log("hi ajax if")
+                console.log(response.codSuccess)
                 location.href='/order-success'
             }else{
                 razorpayPayment(response)
         
 
             }
-            }
-        })
-    })
 
-    function razorpayPayment(order){
+
+           
+
+        }
+
+    })
+})*/
+function razorpayPayment(order){
     var options = {
 "key": "rzp_test_TZdDL7Szmwn5In", // Enter the Key ID generated from the Dashboard
 "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -120,7 +156,7 @@ function verifyPayment(payment,order){
             payment,
             order
         },
-        method:'post',
+        method:'post'
         success:(response)=>{
             if(response.status){
                  location.href='/order-success'
@@ -134,6 +170,7 @@ function verifyPayment(payment,order){
    
 
 </script>
+
 <style>
     input[type=radio]{
         width: 20px;

@@ -26,7 +26,7 @@
  
 </div>
 <div class="row">
-   <a href="/users/place-order" class="mt-3 btn btn-success ml-auto" style="width:20rem;"><b>Place Order</b></a>
+   <a href="/place-order" class="mt-3 btn btn-success ml-auto" style="width:20rem;"><b>Place Order</b></a>
                 </div>
                 </div>
                 </div>
@@ -72,7 +72,8 @@
                     <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button>
                 </td>
                 <td>
-                    <a href="" class="btn btn-danger">Remove</a>
+                    <button  class="btn btn-danger" onclick="remove('{{this._id}}','{{this.product._id}}','{{../user._id}}')">Remove</button>
+                    
                 </td>
                 </tr>
                 {{/each}}
@@ -122,6 +123,31 @@
                     document.getElementById(proId).innerHTML=quantity+count
                      document.getElementById('total').innerHTML=response.total
                 }
+            }
+        })
+    }
+    function remove(cartId,proId,userId){
+        console.log("hi remove.....")
+    
+        $.ajax({
+            url:'/remove',
+            data:{
+    
+                cart:cartId,
+                 user:userId,
+                 
+                product:proId
+        
+            
+            },
+            method:'post',
+            success:(response)=>{
+                
+                    alert("product removed from cart")
+                    location.reload()
+                    /*location.href='/cart'*/
+
+                
             }
         })
     }

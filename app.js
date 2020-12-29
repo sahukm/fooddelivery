@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
-app.use(session({secret:"key",cookie:{maxAge:6000000}}))
+app.use(session({secret:"key",cookie:{maxAge:6000000},unblock:"true"}))
 db.connect((err)=>{
   if(err) console.log("connection error"+err)
   else console.log("datbase connected to the port 27017")

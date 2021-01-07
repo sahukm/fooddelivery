@@ -1,3 +1,5 @@
+
+
 <section>
    <div  style="width: 100%;height:1000px;background-color:red;">
 
@@ -14,13 +16,13 @@
   <div class="collapse navbar-collapse ml-auto" id="navbarNav">
     <ul class="navbar-nav  ml-auto">
       <li class="nav-item active">
-        <a class="nav-link text-warning ml-auto" href="/users/home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-warning ml-auto" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-warning" href="/users/about">About</a>
+        <a class="nav-link text-warning" href="/about">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-warning" href="/users/ourBakers">Our Bakers</a>
+        <a class="nav-link text-warning" href="/ourBakers">Our Bakers</a>
       </li>
       <li class="nav-item ">
         <a class="nav-link text-warning" href="#">Contact</a>
@@ -51,6 +53,15 @@
 
 </div>
 </div>
+<section>
+  <div class="row">
+  <div class="container" style="height: 10rem;width:20rem;"> 
+  <h3 class=" text-white ">Our all Items...Have it.....</h3>
+  
+  <a  class="btn btn-warning text-white ml-5 pl-4" style="align-items: center ;" href="/allProducts">View</a>
+  </div>
+</section>
+</div>
 
 
 <section class="p-4 pt-5">
@@ -58,58 +69,28 @@
          <h2  class="text-white text-center p-4">Choose  Our Bakers To Serve You The Best</h2>
          <br>
     <div class="row p-5">
+         {{#each allvendors}}
         <div class="col-md-3">
             
-<div class="card " style="border-color:red; background-color:red;">
-<a href="/users/bakerOne" > <img class="card-img-top img-fluid rounded-circle" src="https://i.pinimg.com/originals/18/74/01/187401415a5004f96313448e14dd432e.png" alt="Card image cap">
+<div class="card " style="border-color:red; background-color:red;width: 14rem;height: 18rem;">
+<a href="/eachBaker/{{this._id}}"> <img class="card-img-top img-fluid rounded-circle"  src="/vendor-images/{{this._id}}.jpg" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title text-warning text-center">Baker WEE Bakes</h5>
-    <p class="card-text text-warning text-center">Kuttippuram</p>
+    <h5 class="card-title text-warning text-center">{{this.shopname}}</h5>
+    
    
   </div>
    </a>
 </div>
 
-        </div>
-             <div class="col-md-3">
-            
-<div class="card " style="border-color:red; background-color:red;">
-<a href="#" >  <img class="card-img-top img-fluid rounded-circle" src="https://i.pinimg.com/originals/18/74/01/187401415a5004f96313448e14dd432e.png" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title text-warning text-center">Bakers Cafe</h5>
-    <p class="card-text text-warning text-center">Nadakkavu</p>
-   
-  </div>
-   </a>
-</div>
 
         </div>
-             <div class="col-md-3">
-            
-<div class="card " style="border-color:red; background-color:red;">
-<a href="#" >  <img class="card-img-top img-fluid rounded-circle" src="https://i.pinimg.com/originals/18/74/01/187401415a5004f96313448e14dd432e.png" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title text-warning text-center">Home Baker</h5>
-    <p class="card-text text-warning text-center">Calicut</p>
-   
-  </div>
-   </a>
-</div>
 
-        </div>
-        <div class="col-md-3">
-            
-<div class="card " style="border-color:red; background-color:red;">
-<a href="#" > <img class="card-img-top img-fluid rounded-circle" src="https://i.pinimg.com/originals/18/74/01/187401415a5004f96313448e14dd432e.png" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title text-warning text-center">Chef King</h5>
-    <p class="card-text text-warning text-center">Mukkam</p>
-   
-  </div>
-   </a>
-</div>
-
-        </div>
+        {{/each}}
+             
+           
+           
+     
+     
 
 
     </div>

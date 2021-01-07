@@ -56,9 +56,9 @@ form.classList.add('was-validated');
 
          
          
-  <form class="needs-validation mt-4"  novalidate>
+  <form class="needs-validation mt-4"   id="checkout-form" novalidate>
   <div class="form-col">
-   <p class="text-white text-center bg-info"> Enter your mobile number for sending otp</p>
+   <p class="text-warning ml-3 "> Enter your mobile number to send otp</p>
     
    
     
@@ -81,6 +81,20 @@ form.classList.add('was-validated');
 
 </div>
   
+<div class="payment"> 
+                            <p class="ml-3 text-warning "> Choose your Channel</p>
+                            <label class="radio-inline ml-3">
+                            <input type="radio" name="Channel" value="SMS" checked>SMS
+                            </label>
+
+                            <label class="radio-inline mt-2">
+                            <input type="radio" name="Channel" value="Call" >Call
+                            </label>
+                            
+
+
+                        </div>
+
 
 
   
@@ -97,17 +111,20 @@ form.classList.add('was-validated');
 <script>
      $("#checkout-form").submit((e)=>{
         e.preventDefault()
+
         $.ajax({
+            
             url:'/otpLoginform',
             method:'post',
             data:$('#checkout-form').serialize(),
             success:(response)=>{
                 alert(response.message)
-               if(response.message=="success")
+               if(response.message)
             { 
-               
-                location.href='/otpverify'
+               console.log("hi if success")
+                location.href='/verify'
             }else{
+                console.log("hi else")
                 location.href='/otpLogin'
         
 

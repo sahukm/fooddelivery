@@ -1,6 +1,6 @@
 function addToCart(proId){
     $.ajax({
-        url:'users/addtoCart/'+proId,
+        url:'/addtoCart/'+proId,
         method:'get',
         success:(response)=>{
             if(response.status){
@@ -8,6 +8,7 @@ function addToCart(proId){
                count=parseInt(count)+1
                $("#cart-count").html(count)
             }
+            
             
         }
     })

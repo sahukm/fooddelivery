@@ -1,0 +1,168 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+
+<body>
+<section>
+    <div style="width: 100%;height:900px;background:cornsilk">
+        <div class="row">
+            <div class="col-md-8">
+                <div class = "row text-center" style="">
+    <div class="col-xs-6 text-center" style="background-color:none; margin-top:10px;">
+        <div class='product-holder'>
+            <img src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2F1542062283%2Fchocolate-and-cream-layer-cake-1812-cover.jpg%3Fitok%3DrEWL7AIN"  class="img-fluid responsive"      alt="">" width="250" height="250" class='product-image'>
+            <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" class="img-fluid rounded-circle responsive p-2" alt="Responsive image">" width="50px" height="50px" class='plus-image'>
+        </div>
+    </div>
+</div>
+               
+                    
+                  <h1 class="mt-4"><span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"  class="text-danger font-weight-bold ">Home</span> <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>  
+                
+        
+            </div>
+            <div class="col-md-4 p-3">
+
+        
+      <h1 class="pt-2"><span>Register to</span>  <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"  class="text-danger font-weight-bold ">Home</span> 
+      <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>
+      
+        <br>
+        <form class="p-4 mr-5"   id="checkout-form">
+      <div class="form-group p-4 mr-5" >
+   
+    <input type="tel" name="mobileNumber"  class="form-control "  placeholder="Mobile-Nmber" style="width: 20rem;border-radius: .75rem;border-width: 2px">
+    
+  </div>
+  <p class="text-center">OTP</p>
+  <div class="row pl-4">
+  
+	
+<div class="col-md-3 pl-5">
+	
+	
+		<input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
+		<input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
+		<input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
+		<input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
+	
+</div>
+    <button type="submit" class="btn btn-success  btn-lg mt-4 ml-5" style="width: 13rem;border-radius: 15px;">Sign In </button>
+    
+</form> 
+
+         
+  
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+     $("#checkout-form").submit((e)=>{
+        e.preventDefault()
+        $.ajax({
+            url:'/verify',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(response)=>{
+                alert(response.message)
+               if(response.message=="success")
+            { 
+               
+                location.href='/bakerOne'
+            }else{
+                location.href='/otpLoginform'
+        
+
+            }
+            }
+        })
+    })
+</script>
+
+</body>
+</html>

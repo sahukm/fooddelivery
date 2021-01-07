@@ -25,7 +25,7 @@
     "morgan": "~1.9.1",
     "razorpay": "^2.0.6",
     "sharp": "^0.26.3",
-    "twilio": "^3.54.0"
+    "twilio": "^3.54.2"
   },
   "devDependencies": {
     "install-peers": "^1.0.3"

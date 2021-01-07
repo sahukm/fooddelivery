@@ -112,14 +112,37 @@ return new Promise(async(resolve,reject)=>{
     console.log(userCart);
     console.log("prod array..");
     console.log(userCart.products);
+
+    
+
     
     if(userCart)
     {
         let isExistingProduct=userCart.products.findIndex(product=>product.item==details.product)
         console.log(isExistingProduct);
     if(isExistingProduct>=0){
+        /*let newProductsArray=  userCart.products.splice(isExistingProduct, 1);*/
+         userCart.products.splice(isExistingProduct, 1);
+    
 
-      let newProductsArray=  userCart.products.splice(isExistingProduct, 1);
+     console.log("after splice..");
+     /*console.log(newProductsArray);*/
+
+        db.get().collection(collection.CART_COLLECTION).updateOne({user:objectId(details.user)},
+      {$set:{products:userCart.products}}).then((response)=>{
+            console.log(response);
+             resolve(response)
+    
+         })
+        /*db.get().collection(collection.CART_COLLECTION).deleteOne( { "products.item" : objectId(isExistingProduct) } ).then((response)=>{
+
+            console.log(response);
+            resolve(response)*
+   
+
+        })*/
+
+      /*)let newProductsArray=  userCart.products.splice(isExistingProduct, 1);
     
 
      console.log("after splice..");
@@ -303,6 +326,7 @@ getTotalAmount:(userId)=>{
 },
 placeOrder:(order,products,total)=>{
     return new Promise((resolve,reject)=>{
+        console.log("hi sheza placeorder");
         console.log(order,products,total);
         let status=order['payment-method']==='COD'?'placed':'pending'
         let orderObj={
@@ -314,7 +338,8 @@ placeOrder:(order,products,total)=>{
             },
             userId:objectId(order.userId),
             paymentMethod:order['payment-method'],
-            products:products,
+            products:products
+            ,
             totalAmount:total,
             status:status,
             date:new Date()
@@ -343,7 +368,12 @@ getAllusers:()=>{
         resolve(users)
     })
 },
-
+getActiveUsers:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let users=await db.get().collection(collection.USER_COLLECTION).find({blockStatus:true}).toArray()
+        resolve(users)
+    })
+},
 deleteUser:(useId)=>{
     return new Promise ((resolve,reject)=>{
         db.get().collection(collection.USER_COLLECTION).removeOne({_id:objectId(useId)}).then((response)=>{
@@ -361,6 +391,14 @@ getUserDetails:(useId)=>{
         })
     })
 },
+getUserBlockDetails:(useId)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(useId)}).then((user)=>{
+            resolve(user.blockStatus)
+        })
+    })
+},
+
 updateUser:(useId,useDetails)=>{
     return new Promise((resolve,reject)=>{
 
@@ -404,12 +442,13 @@ deleteVendor:(venId)=>{
     })
 },
 
-blockUser:(useId)=>{
-    return new Promise ((resolve,reject)=>{
-        let 
+getVendorBlockDetails:(venId)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.VENDOR_COLLECTION).findOne({_id:objectId(venId)}).then((vendor)=>{
+            resolve(vendor.blockStatus)
+        })
     })
 },
-
 getVendorDetails:(venId)=>{
     return new Promise((resolve,reject)=>{
         db.get().collection(collection.VENDOR_COLLECTION).findOne({_id:objectId(venId)}).then((vendor)=>{
@@ -434,7 +473,8 @@ updateVendor:(venId,venDetails)=>{
 
 ,
 getUserOrders:(userId)=>{
-
+console.log("hi user idddddddd");
+    console.log(userId);
     return new Promise(async(resolve,reject)=>{
         console.log(userId);
         let orders=await db.get().collection(collection.ORDER_COLLECTION).find({userId:objectId(userId)}).toArray()
@@ -442,11 +482,21 @@ getUserOrders:(userId)=>{
         resolve(orders)
     })
 },
-getVendorOrders:(vendorId)=>{
+getAllOrders:()=>{
+    console.log("hi all orders");
+
+        return new Promise(async(resolve,reject)=>{
+            
+            let orders=await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+            console.log(orders);
+            resolve(orders[0]._id)
+        })
+    },
+getVendorOrders:(products,vendor)=>{
 
     return new Promise(async(resolve,reject)=>{
-        console.log(vendorId);
-        let orders=await db.get().collection(collection.ORDER_COLLECTION).find({userId:objectId(userId)}).toArray()
+        console.log(vendor);
+        let allOrderProducts=await db.get().collection(collection.ORDER_COLLECTION).find({shopname:objectId(userId)}).toArray()
         console.log(orders);
         resolve(orders)
     })
@@ -465,7 +515,8 @@ getOrderProducts:(orderId)=>{
 
                 $project:{
                     item:'$products.item',
-                    quantity:'$products.quantity'
+                    quantity:'$products.quantity',
+
                 }
             },
             {
@@ -502,8 +553,142 @@ getOrderProducts:(orderId)=>{
 
         ]).toArray()
         console.log("hi userhelper order");
-        console.log(orderItems[0].products);
+        console.log(orderItems);
+        console.log("order products above....");
         resolve(orderItems)
+    })
+},
+getOrderallProducts:()=>{
+    return new Promise(async(resolve,reject)=>{
+        let orderedAllItems=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+           
+           
+            {
+                $unwind:'$products'
+            },
+            {
+
+                $project:{
+                    item:'$products.item',
+                    quantity:'$products.quantity',
+                    totalAmount:'$totalAmount',
+                    paymentMethod:'$paymentMethod',
+                    date:'$date',
+                    status:'$status'
+
+
+                }
+            },
+            {
+                $lookup:{
+                    from:collection.PRODUCT_COLLECTION,
+                    localField:'item',
+                    foreignField:'_id',
+                    as:'product'
+                }
+            },
+            {
+                $project:{
+                    item:1,product:{$arrayElemAt:['$product',0]},quantity:1,totalAmount:1,paymentMethod:1,date:1,status:1
+
+                }
+            }
+          /*  {
+                $lookup:{
+                    from:collection.PRODUCT_COLLECTION,
+                    let:{prodList:'$products'},
+                    pipeline:[
+                        {
+                            $match:{
+                                $expr:{
+                                    $in:['$_id',"$$prodList"]
+                                    
+                                }
+                            }
+                        }
+                    ],
+                    as:'cartItems'
+                }
+            }*/
+
+        ]).toArray()
+        console.log("hi adminsales order");
+        console.log(orderedAllItems);
+        console.log("order products above....");
+        resolve(orderedAllItems)
+    })
+},
+    
+getVendorOrderProducts:(venId)=>{
+    console.log(objectId(venId));
+     return new Promise(async(resolve,reject)=>{
+        let vendororderItems=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+           
+            {
+                $unwind:'$products'
+            }
+           /*{
+                $project:{
+                
+                
+                product:'$products.product'
+                    }
+            },  
+            
+            {
+                $unwind:'$product'
+            },   
+
+            {
+                $project:{
+                
+                name:'$product.name',
+               vendorId :'$product.vendorId'
+                    }
+            }*/
+               
+            ,
+            
+            
+              { 
+                  $match:{  "products.product.vendorId" :venId}
+            
+             }
+            ,
+          {
+                $unwind:'$products'
+            },
+            
+
+            {   
+                $project:{
+                    item:'$products.item',
+                    quantity:'$products.quantity',
+                    totalAmount:'$totalAmount',
+                    paymentMethod:'$paymentMethod',
+                    date:'$date',
+                    status:'$status'
+
+
+                }
+                
+            },
+            { $lookup:{
+                from:collection.PRODUCT_COLLECTION,
+                localField:'item',
+                foreignField:'_id',
+                as:'product'
+            }
+            },
+            { $project:{
+                    
+                item:1,product:{$arrayElemAt:['$product',0]},quantity:1,totalAmount:1,paymentMethod:1,date:1,status:1
+                }
+            }
+        ]).toArray()
+        resolve(vendororderItems)
+        console.log("end of sales vendororderitems");
+         console.log(vendororderItems);
     })
 },
     
@@ -549,6 +734,74 @@ verifyPayment:(details)=>{
             reject()
         }
 
+    })
+},
+blockVendor:(vendorId)=>{
+    console.log(" vendor block usrhlp status");
+
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.VENDOR_COLLECTION)
+        .updateOne({_id:objectId(vendorId)},
+        {
+            $set:{
+               blockStatus:false
+            }
+        }
+        ).then(()=>{
+            resolve()
+            
+        })
+    })
+},
+unblockVendor:(vendorId)=>{
+    console.log(" vendor block usrhlp status");
+
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.VENDOR_COLLECTION)
+        .updateOne({_id:objectId(vendorId)},
+        {
+            $set:{
+               blockStatus:true
+            }
+        }
+        ).then(()=>{
+            resolve()
+            
+        })
+    })
+},
+blockUser:(userId)=>{
+    console.log(" user block usrhlp status");
+
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.USER_COLLECTION)
+        .updateOne({_id:objectId(userId)},
+        {
+            $set:{
+               blockStatus:false
+            }
+        }
+        ).then(()=>{
+            resolve()
+            
+        })
+    })
+},
+unblockUser:(userId)=>{
+    
+
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.USER_COLLECTION)
+        .updateOne({_id:objectId(userId)},
+        {
+            $set:{
+               blockStatus:true
+            }
+        }
+        ).then(()=>{
+            resolve()
+            
+        })
     })
 },
 changePaymentStatus:(orderId)=>{

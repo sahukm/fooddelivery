@@ -46,6 +46,30 @@ router.post('/login', (req, res, next) => {
 
 
 })
+
+router.get('/salesReport',async(req,res)=>{
+  console.log("hi sales admin");
+  
+  
+/*let orderId=await userHelpers.getAllOrders()
+console.log("hi orderessssss");
+console.log(orderId);*/
+
+/*console.log(orders[0]._id);*/
+
+ let orderedAllItems=await userHelpers.getOrderallProducts()
+ console.log("vendr ordrd prods...");
+ console.log(orderedAllItems);
+
+ /* let orders=await userHelpers.getUserOrders(req.session.user._id)
+  console.log(orders);
+  console.log("hi new orders");*/
+
+  res.render('admin/salesreport',{admin:true,orderedAllItems})
+  console.log("hi after adminsales");
+  /*res.redirect('login');*/ 
+  /*res.render('admin/login')*/
+})
 router.get('/logout', (req, res) => {
 
   res.redirect('/admin/login');
@@ -294,16 +318,50 @@ router.get('/salesReportVendor/:id', async (req, res) => {
   res.render('admin/salesReportVendor', { vendor: req.session.vendor, venSailedProducts });
 });
 
-router.get('/blockUser/:id', (req, res) => {
-  console.log(req.session)
-  let userId = ObjectID(req.params.id)
-  console.log("hi block");
 
-  req.session.unBlock = false
-
+router.get('/blockVendor/:id', async(req, res) => {
+ 
 
   
+    console.log("hi block vndor router");
+    console.log(req.params.id);
+    console.log("Success full blocked");
+    await userHelpers.blockVendor(req.params.id).then(()=>{
 
+      res.redirect('/admin/vendorManagement')
+    
+      
+      console.log("hi user help");
+    })
+ })
+
+ router.get('/unblockVendor/:id', async(req, res) => {
+ 
+
+  
+  console.log("hi unblock vndor router");
+  console.log(req.params.id);
+  console.log("Success full blocked");
+ await userHelpers.unblockVendor(req.params.id).then(()=>{
+
+    
+      res.redirect('/admin/vendorManagement')
+  
+    
+    
+  })
+})
+
+router.get('/blockUser/:id', async(req, res) => {
+ 
+
+  console.log("hi block user router");
+  console.log(req.params.id);
+  console.log("Success full user blocked");
+  await userHelpers.blockUser(req.params.id).then(()=>{
+    console.log("hi user help");
+    res.redirect('/admin/userManagement')
+  })
 
 
  
@@ -311,19 +369,15 @@ router.get('/blockUser/:id', (req, res) => {
 
 
 })
-router.get('/unblockUser/:id', (req, res) => {
-  console.log(req.session)
-  let userId = ObjectID(req.params.id)
-
-  console.log(userId);
-  req.session.unBlock = true
-
-
-
-  console.log(req.session.unBlock)
-  console.log("hi unbloch");
-
-
+router.get('/unblockUser/:id', async(req, res) => {
+  
+  console.log("hi unblock user router");
+  console.log(req.params.id);
+  console.log("Success full unblocked");
+ await userHelpers.unblockUser(req.params.id).then(()=>{
+    console.log("hi user help");
+    res.redirect('/admin/userManagement')
+  })
 })
 
 

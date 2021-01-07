@@ -63,7 +63,7 @@
       <th scope="col">ID</th>
       <th scope="col">Vendor Name</th>
       <th scope="col">Shop Name</th>
-      
+       <th scope="col">Status</th>
       
        <th>Image</th>
       <th scope="col">Action</th>
@@ -76,6 +76,7 @@
       <th scope="row">1</th>
       <td>{{this.Name}}</td>
       <td>{{this.shopname}}</td>
+      <td>{{this.blockStatus}}</td>
       
      
    <td><img style="width:50px;height:50px" src="/vendor-images/{{this._id}}.jpg" alt=""></td>
@@ -84,7 +85,9 @@
             
      <a href="/admin/deleteVendor?id={{this._id}}&name=ezzah" class="btn btn-danger" onclick="return confirm('ar u sure want to delete  {{this.name}}?')">Delete</a>
    
- 
+ <a href="/admin/blockVendor/{{this._id}}" class="btn btn-danger">Block</a>
+   <a href="/admin/unblockVendor/{{this._id}}" class="btn btn-success">Un Block</a>
+   
    </td>
     </tr>
  {{/each}}

@@ -10,7 +10,7 @@ module.exports={
 
     addProduct:(product,callback)=>{
         console.log(product)
-        db.get().collection('product').insertOne(product).then((data)=>{
+        db.get().collection(collection.PRODUCT_COLLECTION).insertOne(product).then((data)=>{
             /*console.log(data*/
             callback(data.ops[0]._id)
         })
@@ -25,14 +25,27 @@ module.exports={
         })
     },
     getVendorAllProducts:(vendor)=>{
+        console.log(vendor);
         
         return new Promise(async(resolve,reject)=>{
             
             let vendorProducts=await db.get().collection(collection.PRODUCT_COLLECTION)
-            .find({shopname:vendor.shopname}).toArray()
+            .find({vendorId:vendor}).toArray()
             resolve(vendorProducts)
             console.log("hivend productsssss")
             console.log(vendorProducts);
+        })
+    },
+    getCategoryAllProducts:(categoryId)=>{
+        console.log(category);
+        
+        return new Promise(async(resolve,reject)=>{
+            
+            let categoryProducts=await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find({category:categoryId}).toArray()
+            resolve(categoryProducts)
+            console.log("hivend  cateogery productsssss")
+            console.log(categoryProducts);
         })
     },
 

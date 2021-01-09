@@ -45,14 +45,14 @@
     </tr>
   </thead>
   <tbody>
-    {{#each products}}
+    {{#each orderedAllItems}}
 
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{this._id}}</th>
       <td>{{this.product.name}}</td>
       
       
-      <td>{{this.product.quantity}}</td>
+      <td>{{this.quantity}}</td>
       <td>{{this.date}}</td>
       
   

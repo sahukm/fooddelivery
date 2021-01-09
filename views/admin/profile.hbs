@@ -1,0 +1,81 @@
+<section>
+    <div class="nav">
+              
+                <nav style="width: 100%; background-color:black "   class="navbar navbar-expand-lg navbar-dark ">
+                     <div  class="p-2 pl-2 ml-2"  style="width: 5rem;height:4rem;"  >
+       <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" class="img-fluid img-responsive img-thumbnail rounded-circle p-2" alt="Responsive image">     
+                </div>
+  <a class="navbar-brand" href="#"><h1 ><span style="text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 blue, 0 -1px red;"  class="text-danger font-weight-bold ">Home</span> <span style="text-shadow: -1px 0 red, 0 2px red, 2px 0 red, 0 -1px red;" 
+  class ="text-warning">Chef</span></h1></a>
+  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse ml-auto" id="navbarNav">
+    <ul class="navbar-nav  ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-warning ml-auto" style="font-size: larger;" ><b><i>ADMIN PROFILE</i></b><span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-info  text-white" href="">Edit Your Profile</a>
+      </li>
+      
+    </ul>
+                 <div class="dropdown ml-2">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   {{#if admin}}
+     {{admin.Name}}
+    {{else}}
+    Account
+   {{/if}}
+    
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       {{#if user}}
+     <a class="dropdown-item" href="/logout">Logout</a>
+    {{else}}
+    <a class="dropdown-item" href="/login">Login</a>
+   {{/if}}
+    
+   
+  </div>
+</div>
+  </div>
+</nav>
+</section>
+
+<section >
+
+    <div style="height:1000px; background-color:black;">
+        <div class="row">
+            <div class="col-md-6 " style="background-color:black;">
+                <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" alt="" 
+                class="mt-5 ml-5 img-fluid img-responsive  rounded-circle p-2" alt="Responsive image" style="height: 20rem;width:30rem;">
+                
+            </div>
+           
+                <div class="col-md-6  text-white mt-5 pl-5 mt-4" style="background-color:black;">
+                     <br>
+            <br>
+                    <h2>About</h2>
+                    
+                        <label class="text-danger"><i>Name:</i></label>   <label>Shahana</label>
+                        <br>
+                        
+                         <label class="text-danger"><i>Place:</i></label>    <label >Jeddah</label>
+                         <br>
+                         
+                        <label class="text-danger" ><i>Email:</i></label>   <label>skm@gmail.com</label>
+                        <br>
+                        
+                         <label class="text-danger"><i>Mobile:</i></label>    <label >98434346465</label>
+                         <br>
+
+                        
+
+                        
+                    
+
+                </div>
+            </div>
+        </div>
+</section>

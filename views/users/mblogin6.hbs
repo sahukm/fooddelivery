@@ -4,27 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-
-(function() {
-'use strict';
-window.addEventListener('load', function() {
-// Fetch all the forms we want to apply custom Bootstrap validation styles to
-var forms = document.getElementsByClassName('needs-validation');
-// Loop over them and prevent submission
-var validation = Array.prototype.filter.call(forms, function(form) {
-form.addEventListener('submit', function(event) {
-if (form.checkValidity() === false) {
-event.preventDefault();
-event.stopPropagation();
-}
-form.classList.add('was-validated');
-}, false);
-});
-}, false);
-})();
-
-    </script>
+   
 </head>
 
 <body>
@@ -56,52 +36,32 @@ form.classList.add('was-validated');
 
          
          
-  <form class="needs-validation mt-4"   id="checkout-form" novalidate>
-  <div class="form-col">
-   <p class="text-warning ml-3 "> Enter your mobile number to send otp</p>
+ 
+   <div class="container">
+    <div class="row">
+    <div class="col-md-6">
+    <h1>OTP login</h1>
+    {{#if error}}
+    <p>{{error}}</p>
+    {{/if}}
+    <p>Please enter your phone number (in inter national format,starting with +) 
+        to receive a verification code:
+    </p>
+    <form method="post" action="/step2">
+        <input type="tel"  name="number"/>
+        <input type="submit" value="Send Code"/>
+    </form>
+    </div>
+    </div>
+    </div>
     
    
     
 
     
     
-    <div class="col-md-4 mb-3" >
-      
-      <input  type="tel"  style="width: 20rem; border: none;
-  border-bottom: 2px solid gray; border-width:2px;" class="form-control" name="phonenumber" id="validationCustom02" placeholder="Phone Number" 
-        required>
-      <div class="valid-feedback">
-        Looks good!
-      </div>
-      <div class="invalid-feedback">
-        wrong number!
-      </div>
-    </div>
-    
+   
 
-</div>
-  
-<div class="payment"> 
-                            <p class="ml-3 text-warning "> Choose your Channel</p>
-                            <label class="radio-inline ml-3">
-                            <input type="radio" name="Channel" value="SMS" checked>SMS
-                            </label>
-
-                            <label class="radio-inline mt-2">
-                            <input type="radio" name="Channel" value="Call" >Call
-                            </label>
-                            
-
-
-                        </div>
-
-
-
-  
-  
-  
-  <button type="submit" class="btn btn-success  btn-lg mt-1 ml-5" style="width: 13rem;border-radius: 15px;">Sign Up </button>
-</form>
       
             </div>
         </div>

@@ -40,20 +40,22 @@
      
       
        
-      <th scope="col">Email</th>
+      
       <th scope="col">phone Number</th>
+      <th scope="col">Email</th>
     </tr>
   </thead>
   <tbody>
     {{#each orders}}
 
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{this._id}}</th>
       <td>{{this.deliveryDetails.name}}</td>
       
       
-      <td>{{this.deliveryDetails.email}}</td>
-      <td>{{this.deliveryDetails.phonenumber}}</td>
+     
+      <td>{{this.deliveryDetails.mobile}}</td>
+       <td>{{this.deliveryDetails.email}}</td>
       
   
     </tr>

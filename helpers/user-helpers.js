@@ -334,6 +334,7 @@ placeOrder:(order,products,total)=>{
                 name:order.name,
                 mobile:order.mobile,
                 address:order.address,
+                email:order.email,
                 pincode:order.pincode
             },
             userId:objectId(order.userId),
@@ -667,7 +668,8 @@ getVendorOrderProducts:(venId)=>{
                     totalAmount:'$totalAmount',
                     paymentMethod:'$paymentMethod',
                     date:'$date',
-                    status:'$status'
+                    status:'$status',
+                    price:'$product.price'
 
 
                 }
@@ -685,6 +687,8 @@ getVendorOrderProducts:(venId)=>{
                 item:1,product:{$arrayElemAt:['$product',0]},quantity:1,totalAmount:1,paymentMethod:1,date:1,status:1
                 }
             }
+
+           
         ]).toArray()
         resolve(vendororderItems)
         console.log("end of sales vendororderitems");
@@ -692,6 +696,7 @@ getVendorOrderProducts:(venId)=>{
     })
 },
     
+
 
 
 getCartProductList:(userId)=>{

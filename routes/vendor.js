@@ -7,7 +7,7 @@ var vendorHelpers=require('../helpers/vendor-helpers')
 /* GET home page. */
 const verifyVendorLogin=async(req,res,next)=>{
   console.log("lofin verify111. vendor...");
-  console.log(req.session.vendor._id);
+  
   let vendorBlockStatus=await userHelpers.getVendorBlockDetails(req.session.vendor._id)
 
 console.log(vendorBlockStatus);
@@ -28,23 +28,31 @@ console.log(vendorBlockStatus);
 router.get('/', function(req, res, next) {
   res.render('vendor/login', { title: 'Express' });
 });
-router.get('/home',verifyVendorLogin,(req,res)=>{
-  res.render('vendor/home',{vendorHead:true  ,vendor:req.session.vendor})
+router.get('/home',verifyVendorLogin,async(req,res)=>{
+ /*let totalOrder=await productHelpers.getVendorTotalOrders(req.session.vendor._id)
+  console.log(totalOrder);*/
+  totalSaledItems=await productHelpers.getVendorSaledProducts(req.session.vendor._id)
+  totalProducts=await productHelpers.getVendorTotalProducts(req.session.vendor._id)
+  totalAmount=await productHelpers.getVendorTotalAmount(req.session.vendor._id)
+  res.render('vendor/home',{vendorHead:true  ,vendor:req.session.vendor,totalProducts,totalSaledItems,totalAmount})
   
   console.log("hi vendor");
+  console.log(totalOrder);
   /*res.redirect('login');*/
   /*res.render('admin/login')*/
 })
 
-router.post('/login',(req,res)=>{
+router.post('/login',async(req,res)=>{
   console.log('hi login')
-    vendorHelpers.doLogin(req.body).then((response)=>{
+ 
+      
+   await vendorHelpers.doLogin(req.body).then((response)=>{
+   
       if(response.status){
         console.log("true vendor");
         req.session.vendorloggedIn=true
         req.session.vendor=response.vendor
         
-      
         
       
        res.render('vendor/home',{vendorHead:true,vendor:req.session.vendor})
@@ -95,6 +103,7 @@ router.post('/login',(req,res)=>{
   
   router.get('/productManagement',async(req,res)=>{
     console.log("hi pro mngmnt true");
+    
       
     await productHelpers.getVendorAllProducts(req.session.vendor._id).then((products)=>{
       res.render('vendor/productManagement',{vendorHead:true,products})
@@ -166,9 +175,9 @@ router.post('/login',(req,res)=>{
       /*res.render('admin/login')*/
     })
     router.get('/orderHistory',async(req,res)=>{
-      log("hi ordr history")
-      console.log(req.session.user);
-      let orders=await userHelpers.getUserOrders(req.session.user._id)
+      
+      
+      let orders= await userHelpers.getVendorOrderProducts(req.session.vendor._id)
       res.render('vendor/orderHistory',{vendorHead:true,orders,vendor:req.session.vendor})
       /*res.redirect('login');*/
       /*res.render('admin/login')*/

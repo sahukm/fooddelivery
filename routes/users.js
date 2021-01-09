@@ -4,15 +4,8 @@ var express = require('express');
 var router = express.Router()
 
 
-var TWILIO_SERVICE_ID = 'VAc233ab4b0848fa56d686b21de7df2d2c';
-var TWILIO_TOKEN = 'ee51113c5e04d9fc5adbfe8c021d9a52';
-var TWILIO_ACCOUNT_SID = 'ACaa6859015fecd41202571e728aa4dcb5';
-var client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_TOKEN);
 
 
-/*const otp=require('../config/otp')
-require('dotenv/config')
-const client=require("twilio")(otp.accountID,otp.authToken)*/
 
 const { render, response } = require('../app');
 
@@ -21,7 +14,7 @@ var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
 var categoryHelpers = require('../helpers/category-helpers');
 const vendorHelpers = require('../helpers/vendor-helpers');
-
+var messagebird =require('messagebird')('tHV2jkkjT57wXPoqxYIliRVKR')
 
 
 /* GET home page. */
@@ -331,8 +324,37 @@ router.post('/place-order', async (req, res) => {
  console.log(req.body);
 
 })*/
-router.get('/otpLoginform', (req, res) => {
-  res.render("users/otpLoginform")
+router.get('/mblogin', (req, res) => {
+  res.render("users/mblogin")
+})
+router.post('/step2',function(req,res){
+  var number=req.body.number;
+  messagebird.verify.create(number,{
+    template:"your verification code is %token"},function(err,response){
+      if(err){
+        console.log(err);
+        res.render('users/mblogin',{error:err.errors[0].description})
+      }else{
+        console.log(response);
+        res.render('users/step2',{id:response.id})
+      }
+
+    
+
+  })
+})
+router.post('/step3',function(req,res){
+  var id=req.body.id
+  var token=req.body.token
+  messagebird.verify.verify(id,token,function(err,response){
+    if(err){
+      res.render('users/step2',{error:err.errors[0].description,
+      id:id})
+    }
+    else{
+      res.render('users/step3')
+    }
+  })
 })
 router.get('/verify', (req, res) => {
   res.render("users/verify")

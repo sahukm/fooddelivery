@@ -1,0 +1,42 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">Edit Admin Profile</h2>
+<form action="/admin/editAdmin" method="post" enctype="multipart/form-data" >
+  <div class="form-group">
+    <label for="">Name</label>
+    <input type="text" class="form-control" name="name" value="{{admin.name}}">
+    
+  </div>
+
+  <div class="form-group">
+    <label for=""> Place</label>
+    <input type="text" class="form-control" name="name" value="{{admin.place}}">
+    
+  </div>
+ 
+  <div class="form-group">
+    <label for="">Email</label>
+    <input type="email" class="form-control" name="email"value="{{admin.email}}">
+  </div>
+  
+  
+  
+ 
+   
+
+
+  
+  <button type="submit" class="btn btn-success mt-4">Submit</button>
+</form>
+ </div>
+        </div>
+    </div>
+</section>
+
+<script>
+  function viewImage(event){
+    document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+  }
+</script>

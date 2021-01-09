@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+
+
+
+
+
+
+<body>
+    <div class="container bg-info text-white p-5" style="height: 2000px;;">
+    <div class="row">
+    <div class="col-md-6">
+    <h1>OTP login</h1>
+    {{#if error}}
+    <p>{{error}}</p>
+    {{/if}}
+    <p>Please enter your phone number (in inter national format,starting with +) 
+        to receive a verification code:
+    </p>
+    <form method="post" action="/step2">
+        <input type="tel"  name="number"/>
+        <input type="submit" value="Send Code"/>
+    </form>
+    </div>
+    </div>
+    </div>
+</body>
+</html>

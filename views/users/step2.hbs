@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-6">
+    <h1>OTP login</h1>
+    {{#if error}}
+    <p>{{error}}</p>
+    {{/if}}
+    <p>We have sent you a verification code!
+    </p>
+    <p>Please entr the code here:</p>
+    <form method="post" action="/step3">
+    <input type="hidden" name="id" value="{{id}}"/>
+        <input type="text"  name="token"/>
+        <input type="submit" value="Check Code"/>
+    </form>
+    </div>
+    </div>
+    </div>
+</body>
+</html>

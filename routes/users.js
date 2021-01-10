@@ -169,7 +169,7 @@ router.post('/signup', async (req, res) => {
     req.session.user = response
 
 
-    res.redirect('/login')
+    res.redirect('/bakerOne')
     console.log(response)
 
   })

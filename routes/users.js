@@ -75,12 +75,15 @@ router.get('/allProducts', async function (req, res, next) {
   }
   /*await categoryHelpers.getAllcategories().then((categories) => {
     categoriestable = categories
-  })*/
+  })*/await categoryHelpers.getAllcategories().then((categories) => {
+    categoriestable = categories
+  })
 
-  productHelpers.getAllproducts().then((products) => {
+  await productHelpers.getAllproducts().then((products) => {
     
     console.log("checking catg");
-    res.render('users/allProducts', { products,  user, cartCount })
+    
+    res.render('users/allProducts', { products,  user, cartCount ,categoriestable})
 
   })
 
@@ -95,14 +98,12 @@ router.get('/bakerOne', verifyLogin, async function (req, res, next) {
   if (user) {
     cartCount = await userHelpers.getCartCount((req.session.user._id))
   }
-  await categoryHelpers.getAllcategories().then((categories) => {
-    categoriestable = categories
-  })
+  
 
   await productHelpers.getAllproducts().then((products) => {
     console.log(categoriestable);
     console.log("checking catg");
-    res.render('users/bakerOne', { products, user, categoriestable,cartCount })
+    res.render('users/bakerOne', { products, user, cartCount })
 
   })
 

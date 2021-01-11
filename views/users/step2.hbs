@@ -6,7 +6,7 @@
     
 </head>
 <body>
-    <div class="container">
+    <div class="container bg-info text-white" style="height: 2000px;">
     <div class="row">
     <div class="col-md-6">
     <h1>OTP login</h1>
@@ -19,7 +19,9 @@
     <form method="post" action="/step3">
     <input type="hidden" name="id" value="{{id}}"/>
         <input type="text"  name="token"/>
-        <input type="submit" value="Check Code"/>
+        <br>
+        <br>
+        <input type="submit" class="btn-danger text-white text-bold text-center" value="Check Code"/>
     </form>
     </div>
     </div>

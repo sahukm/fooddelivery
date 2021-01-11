@@ -14,7 +14,7 @@ var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
 var categoryHelpers = require('../helpers/category-helpers');
 const vendorHelpers = require('../helpers/vendor-helpers');
-var messagebird =require('messagebird')('tHV2jkkjT57wXPoqxYIliRVKR')
+var messagebird =require('messagebird')('Q6ZxlvfMhozXeoq2GPv1nBWIL')
 
 
 /* GET home page. */

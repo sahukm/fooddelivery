@@ -63,7 +63,6 @@ router.get('/home', function (req, res, next) {
   let user = req.session.user
   res.render('users/home', { user });
 });
-
 router.get('/allProducts', async function (req, res, next) {
   console.log("hi all prod");
 
@@ -75,15 +74,12 @@ router.get('/allProducts', async function (req, res, next) {
   }
   /*await categoryHelpers.getAllcategories().then((categories) => {
     categoriestable = categories
-  })*/await categoryHelpers.getAllcategories().then((categories) => {
-    categoriestable = categories
-  })
+  })*/
 
-  await productHelpers.getAllproducts().then((products) => {
+  productHelpers.getAllproducts().then((products) => {
     
     console.log("checking catg");
-    
-    res.render('users/allProducts', { products,  user, cartCount ,categoriestable})
+    res.render('users/allProducts', { products,  user, cartCount })
 
   })
 
@@ -98,16 +94,19 @@ router.get('/bakerOne', verifyLogin, async function (req, res, next) {
   if (user) {
     cartCount = await userHelpers.getCartCount((req.session.user._id))
   }
-  
+  await categoryHelpers.getAllcategories().then((categories) => {
+    categoriestable = categories
+  })
 
   await productHelpers.getAllproducts().then((products) => {
     console.log(categoriestable);
     console.log("checking catg");
-    res.render('users/bakerOne', { products, user, cartCount })
+    res.render('users/bakerOne', { products, user, categoriestable,cartCount })
 
   })
 
 });
+
 router.get('/about', function (req, res, next) {
   console.log("i am bout");
   res.render('users/about');

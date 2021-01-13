@@ -1,0 +1,64 @@
+<div > 
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="nav">
+              
+                <nav style="width: 100%; background-color:black "   class="navbar navbar-expand-lg navbar-dark ">
+                     <div  class="p-2 pl-2 ml-2"  style="width: 5rem;height:4rem;"  >
+       <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" class="img-fluid img-responsive img-thumbnail rounded-circle p-2" alt="Responsive image">     
+                </div>
+  <a class="navbar-brand" href="#"><h1 ><span style="text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 blue, 0 -1px red;"  class="text-danger font-weight-bold ">Home</span> <span style="text-shadow: -1px 0 red, 0 2px red, 2px 0 red, 0 -1px red;" 
+  class ="text-warning">Chef</span></h1></a>
+  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse ml-auto" id="navbarNav">
+    <ul class="navbar-nav  ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-warning ml-auto" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-warning" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-warning" href="/ourBakers">Our Bakers</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link text-warning" href="#">Contact</a>
+      </li>
+    </ul>
+                 <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   {{#if user}}
+     {{user.Name}}
+    {{else}}
+    Account
+   {{/if}}
+    
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       {{#if user}}
+     <a class="dropdown-item" href="/logout">Logout</a>
+    {{else}}
+    <a class="dropdown-item" href="/login">Login</a>
+   {{/if}}
+    
+   
+  </div>
+</div>
+  </div>
+</nav>
+            </div>
+            <div class="bg-image" style=" position: relative;">
+                <img style= " display: block;height:100%;
+    width: 100%;
+    max-width: 1600px;
+    max-height: 2000px; 
+    margin: 0 auto; "  src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2F1542062283%2Fchocolate-and-cream-layer-cake-1812-cover.jpg%3Fitok%3DrEWL7AIN"  class="img-fluid responsive"      alt="">
+          
+            </div>
+            <div class="main"></div>
+            
+        </div>
+    </div>
+</div>

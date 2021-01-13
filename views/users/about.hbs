@@ -1,31 +1,74 @@
-<div class="nav ">
-                     <nav style="width: 100%; background-color:white"   class="navbar navbar-expand-lg navbar-light ">
-                     <div  class="p-2 pl-2 ml-2"  style="width: 5rem;height:4rem;"  >
-       <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" class="img-fluid img-responsive img-thumbnail rounded-circle p-2" alt="Responsive image">     
+<header class="">
+    <div class="row">
+        
+            <div class="col-md-6 col-8">
+                <div class="row">
+                <div class="p-2 pl-2 ml-2 mb-2" style="width: 5rem;height:4rem;">
+                    <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7"
+                        class="img-fluid img-responsive img-thumbnail rounded-circle p-2" alt="Responsive image">
                 </div>
-  <a class="navbar-brand" href="#"><h1 ><span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"  class="text-danger font-weight-bold ">Home</span> <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" 
-  class ="text-warning">Chef</span></h1></a>
-  <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                <div>
+                    
+                        <h1 class="text-center p-2 "><span style="text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 blue, 0 -1px red;"
+                                class="text-danger font-weight-bold ">Home</span> <span
+                                style="text-shadow: -1px 0 red, 0 2px red, 2px 0 red, 0 -1px red;"
+                                class="text-warning">Chef</span></h1>
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-4">
+            <div class="nav">
+              
+                <nav style="width: 100%; height:100%;;"   class="navbar navbar-expand-lg navbar-light ">
+  
+  <button class="navbar-toggler " type="button"  style="background-color: crimson;"  data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse ml-auto" id="navbarNav">
     <ul class="navbar-nav  ml-auto">
       <li class="nav-item active">
-        <a class="nav-link text-warning ml-auto" href="/home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-danger ml-auto" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-warning" href="/about">About</a>
+        <a class="nav-link text-danger" href="/about">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-warning" href="/ourBakers">Our Bakers</a>
+        <a class="nav-link text-danger" href="/ourBakers">Our Bakers</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link text-warning" href="#">Contact</a>
+        <a class="nav-link text-danger" href="#">Contact</a>
       </li>
     </ul>
+                 <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button"  style="background-color: crimson;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   {{#if user}}
+     {{user.Name}}
+    {{else}}
+    Account
+   {{/if}}
+    
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       {{#if user}}
+     <a class="dropdown-item" href="/logout">Logout</a>
+    {{else}}
+    <a class="dropdown-item" href="/login">Login</a>
+   {{/if}}
+    
+   
+  </div>
+</div>
   </div>
 </nav>
             </div>
+
+
+        </div>
+    </div>
+</header>
 
 <div class="container">
     <div class="row ">
@@ -45,9 +88,9 @@
             </blockquote>
         </div>
         <div class="col-md-6">
-            <div style="width: 65rem;height:60rem;">
+          
                 <img class="img-fluid responsive rounded "
-                    src="https://i.pinimg.com/564x/2f/6f/3c/2f6f3c91356937c5e991ae0dad07bfd6.jpg" </div>
+                    src="https://i.pinimg.com/564x/2f/6f/3c/2f6f3c91356937c5e991ae0dad07bfd6.jpg">
             </div>
         </div>
     </div>

@@ -16,14 +16,14 @@
                             <div class="row pl-2">
                                    {{#if user}}
      
-                            <button onclick="addToCart('{{this._id}}')" class="btn btn-primary">Add to cart</button>
+                            <button onclick="addToCart('{{this._id}}')" class="btn btn-primary  ">Add to cart</button>
                     {{else}}
                             <a class="btn btn-primary" href="/login">Add to cart</a>
                      {{/if}} 
                             
                         
                     
-                       <a class="btn btn-danger" href="/place-order/{{this._id}}">Buy Now</a>
+                       <a class="btn btn-danger ml-2" href="/place-order/{{this._id}}">Buy Now</a>
                         </div>
                         </div>
                     </div>

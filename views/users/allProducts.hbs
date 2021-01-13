@@ -3,11 +3,11 @@
             <div class="row pl-5 ml-5">
                 {{#each products}}
                 <div class="col-md-4 pb-3 pl-3">
-                    <div class="card" style="height: 21rem; background-color:white; border-color:gray;">
+                    <div class="card" style="height: 24rem; background-color:white; border-color:gray;">
                         <img class="card-img-top"
                             src="/product-images/{{this._id}}.jpg"
                             alt="Card image cap" 
-                            style="height: 8rem;">
+                            style="height: 9rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{this.name}}</h5>
                             
@@ -23,7 +23,7 @@
                             
                         
                     
-                       <a class="btn btn-danger ml-2" href="/place-order/{{this._id}}">Buy Now</a>
+                       <a class="btn btn-danger ml-3" href="/place-order/{{this._id}}">Buy Now</a>
                         </div>
                         </div>
                     </div>

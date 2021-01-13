@@ -43,8 +43,8 @@ const verifyLogin = async (req, res, next) => {
 router.get('/', async function (req, res, next) {
 
   console.log("hi loginnnn checking");
-  let user = req.session.user
-  console.log(user);
+  let user1 = req.session.user
+
 
   console.log(req.session);
   console.log(req.session.loggedIn);
@@ -56,7 +56,7 @@ router.get('/', async function (req, res, next) {
 
   }
 
-  res.render('users/home', { user });
+  res.render('users/home', { user1 });
 });
 
 router.get('/home', function (req, res, next) {

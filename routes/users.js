@@ -298,7 +298,7 @@ router.get('/eachCategoryItems/:id', async(req, res) => {
      
      console.log(eachCategoryitems);
   
-     res.render('users/eachCategoryItems',{eachCategoryitems,user: req.session.user,})
+     res.render('users/eachCategoryitems',{eachCategoryitems,user: req.session.user,})
    
   
   })

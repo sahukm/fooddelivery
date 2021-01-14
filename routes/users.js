@@ -65,13 +65,17 @@ router.get('/home', function (req, res, next) {
 });
 router.get('/allProducts', async function (req, res, next) {
   console.log("hi all prod");
-
+  let categoriestable = null
   /*let categoriestable = null*/
   let cartCount = null
   let user = req.session.user
   if (user) {
     cartCount = await userHelpers.getCartCount((req.session.user._id))
   }
+  await categoryHelpers.getAllcategories().then((categories) => {
+    categoriestable = categories
+  })
+  console.log(categoriestable);
   /*await categoryHelpers.getAllcategories().then((categories) => {
     categoriestable = categories
   })*/
@@ -79,7 +83,7 @@ router.get('/allProducts', async function (req, res, next) {
   productHelpers.getAllproducts().then((products) => {
     
     console.log("checking catg");
-    res.render('users/allProducts', { products,  user, cartCount })
+    res.render('users/allProducts', { products,  user, cartCount,categoriestable })
 
   })
 
@@ -283,6 +287,23 @@ router.get('/eachBaker/:id', async(req, res) => {
  
 })
 
+router.get('/eachCategoryItems/:id', async(req, res) => {
+  
+   console.log("hi each catgryitems");
+   console.log(req.params.id);
+  
+   
+  await productHelpers. getCategoryAllProducts(req.params.id).then((eachCategoryitems)=>{
+     console.log("hi user help");
+     
+     console.log(eachCategoryitems);
+  
+     res.render('users/eachCategoryItems',{eachCategoryitems,user: req.session.user,})
+   
+  
+  })
+  
+ })
 router.post('/place-order', async (req, res) => {
   /*let products =  let products = await userHelpers.getCartProducts(req.session.user._id)*/
   let products = await userHelpers.getCartProducts(req.session.user._id)

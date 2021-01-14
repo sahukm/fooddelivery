@@ -53,6 +53,39 @@ doLogin:(userData)=>{
     
     })
     },
+    doLoginAdmin:(adminData)=>{
+        console.log(adminData);
+        return new Promise(async(resolve,reject)=>{
+             let loginStatus=false
+             let response={}
+            let admin=await db.get().collection(collection.ADMIN_COLLECTION).findOne({name:adminData.Name})
+            console.log("hi.....admin...");
+            console.log(admin);
+        if(admin){
+            bcrypt.compare(adminData.Password,admin.Password).then((status)=>{
+                if(status)
+                {
+                    console.log("login success")
+                    response.admin=admin
+                    response.status=true
+                    resolve(response)
+        
+        
+                }
+                else{
+                    console.log("login failed");
+                    resolve({status:false})
+                }
+            })
+        
+        }
+        else{
+            console.log('login failed 1213');
+            resolve({status:false})
+        }
+        
+        })
+        },
 
  
 addtoCart:(proId,userId)=>{
@@ -371,19 +404,28 @@ getAllusers:()=>{
 },
 getActiveUsers:()=>{
     return new Promise(async(resolve,reject)=>{
-        let users=await db.get().collection(collection.USER_COLLECTION).find({blockStatus:true}).toArray()
+        let users=await db.get().collection(collection.USER_COLLECTION).find({activeStatus:"true"}).toArray()
         resolve(users)
+        console.log(users);
+        console.log("active users...");
     })
 },
 deleteUser:(useId)=>{
     return new Promise ((resolve,reject)=>{
-        db.get().collection(collection.USER_COLLECTION).removeOne({_id:objectId(useId)}).then((response)=>{
-           console.log(response);
-            resolve(response)
-
+        db.get().collection(collection.USER_COLLECTION)
+        .updateOne({_id:objectId(useId)},
+        {
+            $set:{
+               activeStatus:false
+            }
+        }
+        ).then(()=>{
+            resolve()
+            
         })
     })
 },
+
 
 getUserDetails:(useId)=>{
     return new Promise((resolve,reject)=>{

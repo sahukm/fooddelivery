@@ -44,13 +44,13 @@ module.exports = {
             console.log(vendorProducts);
         })
     },
-    getCategoryAllProducts: (categoryId) => {
+    getCategoryAllProducts: (category) => {
         console.log(category);
 
         return new Promise(async (resolve, reject) => {
 
             let categoryProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
-                .find({ category: categoryId }).toArray()
+                .find({ categoryId: category }).toArray()
             resolve(categoryProducts)
             console.log("hivend  cateogery productsssss")
             console.log(categoryProducts);
@@ -74,9 +74,9 @@ module.exports = {
             })
         })
     },
-    getAdminDetails: () => {
+    getAdminDetails: (adminId) => {
         return new Promise(async(resolve, reject) => {
-          await  db.get().collection(collection.ADMIN_COLLECTION).find({'name':'shahana'}).then((admin) => {
+          await  db.get().collection(collection.ADMIN_COLLECTION).find({'_id':objectId(adminId)}).then((admin) => {
                 resolve(admin)
             })
         })

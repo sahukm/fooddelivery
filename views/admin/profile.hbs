@@ -15,25 +15,27 @@
       <li class="nav-item active">
         <a class="nav-link text-warning ml-auto" style="font-size: larger;" ><b><i>ADMIN PROFILE</i></b><span class="sr-only">(current)</span></a>
       </li>
+      
       <li class="nav-item">
-        <a class="btn btn-info  text-white" href="">Edit Your Profile</a>
+        <a class="btn btn-info  text-white" href="/admin/editAdmin">Edit Your Profile</a>
       </li>
+      
       
     </ul>
                  <div class="dropdown ml-2">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   {{#if admin}}
-     {{admin.Name}}
+   {{#if adminsession}}
+     {{adminsession.name}}
     {{else}}
     Account
    {{/if}}
     
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-       {{#if user}}
+       {{#if adminsession}}
      <a class="dropdown-item" href="/logout">Logout</a>
     {{else}}
-    <a class="dropdown-item" href="/login">Login</a>
+    <a class="dropdown-item" href="admin/login">Login</a>
    {{/if}}
     
    
@@ -48,7 +50,8 @@
     <div style="height:1000px; background-color:black;">
         <div class="row">
             <div class="col-md-6 " style="background-color:black;">
-                <img src="https://th.bing.com/th/id/OIP.TCwGAWrTlXP7H4WZ6P4FnQHaHb?w=164&h=180&c=7&o=5&pid=1.7" alt="" 
+              <img src="/vendor-images/{{adminsession._id}}.jpg" alt=""
+                
                 class="mt-5 ml-5 img-fluid img-responsive  rounded-circle p-2" alt="Responsive image" style="height: 20rem;width:30rem;">
                 
             </div>
@@ -57,21 +60,22 @@
                      <br>
             <br>
                     <h2>About</h2>
+                  
                     
-                        <label class="text-danger"><i>Name:</i></label>   <label>Shahana</label>
+                        <label class="text-danger"><i>Name:</i></label>   <label>{{adminsession.name}}</label>
                         <br>
                         
-                         <label class="text-danger"><i>Place:</i></label>    <label >Jeddah</label>
+                         <label class="text-danger"><i>Place:</i></label>    <label >{{adminsession.place}}</label>
                          <br>
                          
-                        <label class="text-danger" ><i>Email:</i></label>   <label>skm@gmail.com</label>
+                        <label class="text-danger" ><i>Email:</i></label>   <label>{{adminsession.email}}</label>
                         <br>
                         
-                         <label class="text-danger"><i>Mobile:</i></label>    <label >98434346465</label>
+                         <label class="text-danger"><i>Mobile:</i></label>    <label >{{adminsession.phonenumber}}</label>
                          <br>
 
                         
-
+                    
                         
                     
 

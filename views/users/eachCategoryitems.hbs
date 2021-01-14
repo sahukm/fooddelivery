@@ -1,22 +1,8 @@
- <section>
-
-       <div class="container mt-5 ml-5 pl-5 ">
-            <div class="row pl-5 ml-5">
-                {{#each categoriestable}}
-             <a href="/eachCategoryItems/{{this._id}}">  <div class="col-md-4  pl-5">
-               <p class="pl-3 ml-4" href="/eachCategory/{{this._id}}"  style="padding-left:5px;color: darkred; background-color:rgb(199, 133, 146);width:6rem;">     {{this.name}}</p>
-                    </div></a> 
-                {{/each}}
-
-                
-            </div>
-        </div>
-    </section>
 
 <section>
-        <div class="container mt-3">
+        <div class="container">
             <div class="row pl-5 ml-5">
-                {{#each products}}
+                {{#each eachCategoryitems}}
                 <div class="col-md-4 pb-3 pl-3">
                     <div class="card" style="height: 24rem; background-color:white; border-color:gray;">
                         <img class="card-img-top"

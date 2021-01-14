@@ -17,15 +17,56 @@ router.get('/', function (req, res, next) {
   console.log('hi end');
 });
 
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/home')
+  } else {
+    res.render('admin/login', { "loginErr": req.session.loginErr })
+    req.session.loginErr = false
+  }
+})
 
-
-router.get('/login', function (req, res, next) {
+/*router.get('/login', function (req, res, next) {
   console.log('sdsdsdshi hi');
 
   res.render('admin/login', { title: 'Express' });
-});
+});*/
 
-router.post('/login', async(req, res, next) => {
+router.post('/login', async(req, res) => {
+  totalProducts =  await productHelpers.getTotalProducts()
+  itemSaled=await productHelpers.getItemSaled()
+  amount=await productHelpers.getTotalAmount()
+  console.log('hi dologin admin.....')
+await  userHelpers.doLoginAdmin(req.body).then((response) => {
+    if (response.status) {
+      console.log("true admin");
+      req.session.loggedIn = true
+      req.session.admin = response.admin
+      adminsession=req.session.admin
+      console.log("hi admin session...")
+      console.log(req.session.admin)
+       
+   
+console.log("itemSaled");
+    console.log(totalProducts);
+    console.log(req.body.Name);
+    console.log(req.body.Password);
+    res.render('admin/home', { admin: true,totalProducts,itemSaled ,amount,adminsession});
+      
+
+    } else {
+
+      console.log("false admin");
+      req.session.loginErr = "Invalid username or password"
+      res.redirect('admin/login')
+
+    }
+  })
+
+})
+
+
+/*router.post('/login', async(req, res, next) => {
   console.log('hi login')
   if ((req.body.Name === adminDetais.Name) && (req.body.Password === adminDetais.Password)) {
     
@@ -42,14 +83,14 @@ console.log("itemSaled");
   else {
     console.log('false');
 
-    /*res.render('admin/else');*/
+    /*res.render('admin/else');
     req.session.loginErr = "Invalid username or password"
     res.render('admin/login', { "loginErr": req.session.loginErr })
     req.session.loginErr = false
   }
 
 
-})
+})*/
 
 router.get('/salesReport',async(req,res)=>{
   console.log("hi sales admin");
@@ -79,29 +120,16 @@ router.get('/logout', (req, res) => {
   res.redirect('/admin/login');
   /*res.render('admin/login')*/
 })
-router.get('/editAdmin',async (req,res)=>{
-  
-  let admin=await productHelpers.getAdminDetails()
 
-  console.log(admin);
-  
-  res.render('admin/editAdmin',{admin})
-  
-})
-router.post('/editAdmin',(req,res)=>{
-  let id=req.session.admin._id
- productHelpers.updateAdmin(req.session.admin._id,req.body).then(()=>{
-   res.redirect('/admin/profile')
-   if(req.files.image){
-     let image=req.files.image
-     image.mv('./public/admin-images/'+id+'.jpg')
-   }
- })
-  })
+ 
 
 router.get('/profile', (req, res) => {
+console.log(req.session.admin);
+console.log("prof....");
+let adminsession=req.session.admin
 
-  res.render('admin/profile');
+
+  res.render('admin/profile',{adminsession});
   /*res.render('admin/login')*/
 })
 router.get('/addAdmin',async(req,res)=>{
@@ -112,23 +140,7 @@ router.get('/addAdmin',async(req,res)=>{
   /*res.redirect('login');*/
   /*res.render('admin/login')*/
 })
-router.post('/addAdmin',async(req,res)=>{
-  /*console.log(req.body)*/
- /* console.log(req.files.image)*/
- await productHelpers.addAdmin(req.body,(id)=>{
-   req.session.admin._id=id
-    let image=req.files.image
-    console.log(id)
-    image.mv('./public/admin-images/'+id+'.jpg',(err)=>{
-      if(!err){
-        res.render("admin/addAdmin",{admin:true})
-      }else{
-        console.log(err)
-      }
-    })
-  })
-    
-  })
+
 router.get('/home', async(req, res) => {
   totalProducts =  await productHelpers.getTotalProducts()
     itemSaled=await productHelpers.getItemSaled()
@@ -141,6 +153,7 @@ router.get('/home', async(req, res) => {
 
 router.get('/vendorManagement', (req, res) => {
 
+  
   vendorHelpers.getAllvendors().then((vendors) => {
     res.render('admin/vendorManagement', { admin: true, vendors })
 
@@ -152,7 +165,8 @@ router.get('/vendorManagement', (req, res) => {
 
 router.get('/userManagement', (req, res) => {
 
-  userHelpers.getAllusers().then((users) => {
+  userHelpers.getActiveUsers().then((users) => {
+    console.log(users);
     res.render('admin/userManagement', { admin: true, users })
 
   })
@@ -295,6 +309,31 @@ router.post('/addProduct', (req, res) => {
   
     })
   })
+  
+  router.post('/addAdmin',async(req,res)=>{
+      console.log("hi admin add admin post");
+    await vendorHelpers.doSignupadmin(req.body).then((id)=>{
+     let image = req.files.image
+     console.log("hi imageeee");
+     console.log(image);
+   
+     image.mv('./public/vendor-images/' + id + '.jpg', (err) => {
+       if (!err) {
+         res.render("admin/addAdmin", { admin: true })
+       } else {
+         console.log(err)
+       }
+     })
+         console.log("hi sgnupadmin")
+         req.session.adminloggedIn=true
+         req.session.admin=response
+         
+       
+         res.render("admin/addAdmin",{admin:true})
+         console.log(id)
+     
+       })
+     })
 
 
 /*router.post('/addVendor', (req, res) => {
@@ -356,6 +395,26 @@ router.post('/editVendor/:id', (req, res) => {
   let id = req.params.id
   vendorHelpers.updateVendor(req.params.id, req.body).then(() => {
     res.redirect('/admin/vendorManagement')
+    if (req.files.image) {
+      let image = req.files.image
+      image.mv('./public/vendor-images/' + id + '.jpg')
+    }
+  })
+})
+router.get('/editAdmin', async (req, res) => {
+
+  console.log("hi edit admin");
+  let admin = await vendorHelpers.getAdminDetails(req.session.admin._id)
+  console.log(admin);
+  res.render('admin/editAdmin', { admin})
+
+})
+
+
+router.post('/editAdmin/:id', (req, res) => {
+  let id = req.session.admin._id
+  vendorHelpers.updateAdmin(id, req.body).then(() => {
+    res.redirect('/admin/login')
     if (req.files.image) {
       let image = req.files.image
       image.mv('./public/vendor-images/' + id + '.jpg')

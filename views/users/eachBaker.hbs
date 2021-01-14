@@ -2,14 +2,14 @@
 
         <section>
     <div style="width: 100%;height:480px;background-color:cornsilk">
-        <section>
+         <section>
 
-        <div class="container mt-5 ml-5 p-5">
+       <div class="container mt-5 ml-5 pl-5 ">
             <div class="row pl-5 ml-5">
                 {{#each categoriestable}}
-                <div class="col-md-4  pl-5">
-               <p  href="/eachCategory/{{this._id}}"  style="padding-left:3px;color: darkred; background-color:rgb(199, 133, 146);width:6rem;">     {{this.name}}</p>
-                    </div>
+             <a href="/eachCategoryItems/{{this._id}}">  <div class="col-md-4  pl-5">
+               <p class="pl-3 ml-4" href="/eachCategory/{{this._id}}"  style="padding-left:5px;color: darkred; background-color:rgb(199, 133, 146);width:6rem;">     {{this.name}}</p>
+                    </div></a> 
                 {{/each}}
 
                 

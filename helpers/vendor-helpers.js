@@ -17,6 +17,16 @@ module.exports={
             })
         })
 },
+doSignupadmin:(adminData)=>{
+    console.log("hi dosignupadmin....");
+    return new Promise(async(resolve,reject)=>{
+        adminData.Password=await bcrypt.hash(adminData.Password,10)
+        db.get().collection(collection.ADMIN_COLLECTION).insertOne(adminData).then((data)=>{
+            console.log(data)
+            resolve(data.ops[0]._id)
+        })
+    })
+},
 
 doLogin:(vendorData)=>{
     return new Promise(async(resolve,reject)=>{
@@ -74,6 +84,13 @@ doLogin:(vendorData)=>{
             })
         })
     },
+    getAdminDetails:(admId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.ADMIN_COLLECTION).findOne({_id:objectId(admId)}).then((admin)=>{
+                resolve(admin)
+            })
+        })
+    },
     
     getVendorDetails:(venId)=>{
         return new Promise((resolve,reject)=>{
@@ -96,7 +113,26 @@ doLogin:(vendorData)=>{
             })
         })
     }
-    
+  ,updateAdmin:(admId,admDetails)=>{
+    return new Promise((resolve,reject)=>{
+        db.get().collection(collection.ADMIN_COLLECTION).updateOne({_id:objectId(admId)},{
+            $set:{
+                name:admDetails.name,
+                place:admDetails.place,
+                email:admDetails.email,
+                phonenumber:admDetails.phonenumber
+            
+            
+            }
+        }).then((response)=>{
+            resolve()
+        })
+    })
+}
+
+
+
+  
     
 
 }

@@ -118,7 +118,7 @@ router.get('/about', function (req, res, next) {
 
 router.get('/ourBakers', async function (req, res, next) {
   let allvendors= await vendorHelpers.getAllvendors()
-  res.render('users/ourBakers', { allvendors});
+  res.render('users/ourBakers', { allvendors,user: req.session.user });
 });
 
 router.get('/login', (req, res) => {

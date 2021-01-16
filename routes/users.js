@@ -105,7 +105,7 @@ router.get('/bakerOne', verifyLogin, async function (req, res, next) {
   await productHelpers.getAllproducts().then((products) => {
     console.log(categoriestable);
     console.log("checking catg");
-    res.render('users/bakerOne', { products, user, categoriestable,cartCount })
+    res.render('users/bakerOne', { products, user, categoriestable,cartCount ,userHead:true})
 
   })
 

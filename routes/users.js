@@ -83,7 +83,7 @@ router.get('/allProducts', async function (req, res, next) {
   productHelpers.getAllproducts().then((products) => {
     
     console.log("checking catg");
-    res.render('users/allProducts', { products,  user, cartCount,categoriestable })
+    res.render('users/allProducts', { products,  user, cartCount,categoriestable ,userHead:true})
 
   })
 

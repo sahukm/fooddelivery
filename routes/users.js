@@ -145,10 +145,14 @@ router.get('/cart', verifyLogin, async (req, res) => {
 
   let totalValue = await userHelpers.getTotalAmount(req.session.user._id)
   let products = await userHelpers.getCartProducts(req.session.user._id)
+  let user = req.session.user
+  if (user) {
+    cartCount = await userHelpers.getCartCount((req.session.user._id))
+  }
 
   console.log(products);
   console.log('cart helo');
-  res.render('users/cart', { products, user: req.session.user, totalValue })
+  res.render('users/cart', { products, user: req.session.user, totalValue ,cartCount,userHead:true})
 })
 
 

@@ -21,13 +21,13 @@
             <div class="row ">
                 {{#each eachVendorProducts}}
                 <div class="col-md-4 mt-4">
-                    <div class="card" style="height: 26rem; background-color:white; border-color:gray;">
+                    <div class="card" style="height: 26em; background-color:white; border-color:gray;">
                         <img class="card-img-top"
                             src="/product-images/{{this._id}}.jpg"
                             alt="Card image cap" 
-                            style="height: 8rem;">
+                            style="height: 14em;">
                         <div class="card-body">
-                            <h5 class="card-title">{{this.name}}</h5>
+                            <h5 class="card-title text-center">{{this.name}}</h5>
                             
                             <p class="ml-2 text-center">Rs {{this.price}}</p>
                             <p class="ml-1 text-center">{{this.shopname}}</p>

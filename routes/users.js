@@ -229,14 +229,22 @@ router.get('/order-success', (req, res) => {
   res.render('users/order-success', { user: req.session.user });
 });
 router.get('/orders', async (req, res) => {
+  let user = req.session.user
+  if (user) {
+    cartCount = await userHelpers.getCartCount((req.session.user._id))
+  }
   let orders = await userHelpers.getUserOrders(req.session.user._id)
-  res.render('users/orders', { user: req.session.user, orders });
+  res.render('users/orders', { user: req.session.user, orders,userHead:true,cartCount });
 });
 router.get('/view-order-products/:id', async (req, res) => {
+  let user = req.session.user
+  if (user) {
+    cartCount = await userHelpers.getCartCount((req.session.user._id))
+  }
   let products = await userHelpers.getOrderProducts(req.params.id)
   console.log("hi ordeer products..");
   console.log(products);
-  res.render('users/view-order-products', { user: req.session.user, products });
+  res.render('users/view-order-products', { user: req.session.user, products,userHead:true,cartCount });
 });
 
 router.get('/place-order', async (req, res) => {
@@ -272,6 +280,10 @@ router.get('/place-order/:id',  async (req, res) => {
   
  })*/
 router.get('/eachBaker/:id', async(req, res) => {
+  let user = req.session.user
+  if (user) {
+    cartCount = await userHelpers.getCartCount((req.session.user._id))
+  }
  let categoriestable=null
   console.log("hi each baker");
   console.log(req.params.id);
@@ -284,7 +296,7 @@ router.get('/eachBaker/:id', async(req, res) => {
     
     console.log(eachVendorProducts);
  
-    res.render('users/eachBaker',{eachVendorProducts,categoriestable,user: req.session.user,})
+    res.render('users/eachBaker',{eachVendorProducts,categoriestable,user: req.session.user,userHead:true,cartCount})
   
  
  })
@@ -295,6 +307,10 @@ router.get('/eachCategoryItems/:id', async(req, res) => {
   
    console.log("hi each catgryitems");
    console.log(req.params.id);
+   let user = req.session.user
+   if (user) {
+     cartCount = await userHelpers.getCartCount((req.session.user._id))
+   }
   
    
   await productHelpers. getCategoryAllProducts(req.params.id).then((eachCategoryitems)=>{
@@ -302,7 +318,7 @@ router.get('/eachCategoryItems/:id', async(req, res) => {
      
      console.log(eachCategoryitems);
   
-     res.render('users/eachCategoryitems',{eachCategoryitems,user: req.session.user,})
+     res.render('users/eachCategoryitems',{eachCategoryitems,user: req.session.user,userHead:true,cartCount})
    
   
   })

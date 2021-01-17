@@ -9,6 +9,7 @@ const { response } = require("express")
 module.exports = {
 
     addProduct: (product, callback) => {
+        product.price=parseInt(product.price)
         console.log(product)
         db.get().collection(collection.PRODUCT_COLLECTION).insertOne(product).then((data) => {
             /*console.log(data*/

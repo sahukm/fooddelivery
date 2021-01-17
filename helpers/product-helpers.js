@@ -10,6 +10,7 @@ module.exports = {
 
     addProduct: (product, callback) => {
         product.price=parseInt(product.price)
+        product.tatalnumber=parseInt(product.tatalnumber)
         console.log(product)
         db.get().collection(collection.PRODUCT_COLLECTION).insertOne(product).then((data) => {
             /*console.log(data*/
@@ -90,6 +91,7 @@ module.exports = {
                     shopname: proDetails.shopname,
                     category: proDetails.category,
                     price:parseInt(proDetails.price) ,
+                    tatalnumber:parseInt(proDetails).tatalnumber,
 
                 }
             }).then((response) => {

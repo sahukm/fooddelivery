@@ -117,8 +117,8 @@ console.log(orderId);*/
 })
 router.get('/logout', (req, res) => {
 
-  res.redirect('/admin/login');
-  /*res.render('admin/login')*/
+  //res.redirect('/admin/login');
+  res.render('admin/login')
 })
 
  

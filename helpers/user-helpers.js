@@ -717,6 +717,13 @@ getVendorOrderProducts:(venId)=>{
                 }
                 
             },
+            {
+                $group:{
+                    _id:null,
+        
+                    totalAmount:{$sum:{$multiply:['$quantity','$product.price']}}
+                }
+            },
             { $lookup:{
                 from:collection.PRODUCT_COLLECTION,
                 localField:'item',

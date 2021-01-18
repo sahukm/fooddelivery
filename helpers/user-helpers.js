@@ -685,12 +685,11 @@ module.exports = {
                     $project: {
                         item: '$products.item',
                         quantity: '$products.quantity',
-                      
+                        totalAmount: '$totalAmount',
                         paymentMethod: '$paymentMethod',
                         date: '$date',
                         status: '$status',
-                        price: '$product.price',
-                        totalAmount: quantity*price
+                        price: '$product.price'
 
 
                     }

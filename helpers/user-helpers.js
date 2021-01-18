@@ -729,13 +729,7 @@ getVendorOrderProducts:(venId)=>{
                     
                 item:1,product:{$arrayElemAt:['$product',0]},quantity:1,totalAmount:1,paymentMethod:1,date:1,status:1
                 }
-            }, {
-                $group:{
-                    _id:null,
-        
-                    totalAmount:{$multiply:['$quantity','$product.price']}
-                }
-            },
+            }
 
            
         ]).toArray()

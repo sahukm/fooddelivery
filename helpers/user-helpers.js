@@ -733,7 +733,7 @@ getVendorOrderProducts:(venId)=>{
                 $group:{
                     _id:null,
         
-                    totalAmount:{$sum:{$multiply:['$quantity','$product.price']}}
+                    totalAmount:{$multiply:['$quantity','$product.price']}
                 }
             },
 

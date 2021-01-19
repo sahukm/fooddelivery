@@ -714,15 +714,8 @@ module.exports = {
                         item: 1, product: { $arrayElemAt: ['$product', 0] }, 
                         quantity: 1, totalAmount: 1, paymentMethod: 1, date: 1, status: 1
                     }
-                },
-                {
-                    $group: {
-                        _id: "$_id",
-
-                        totalAmount: { $sum: { $multiply: ['$products.quantity', '$product.price'] } }
-                    }
                 }
-
+                
             ]).toArray()
             resolve(vendororderItems)
             console.log("end of sales vendororderitems");

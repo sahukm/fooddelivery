@@ -1,116 +1,43 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    
-  </head>
-  <body>
-    
 <section>
-  <div class="row ">
-   
-    <div class="col-md-8  bg-light ">
-    
-<img src="https://media.istockphoto.com/photos/funny-happy-baker-picture-id186308619" class="img-fluid" alt="Responsive image">
-    </div>
+    <div class="row">
 
+        <div class="col-md-6">
+            <img src="https://media.istockphoto.com/photos/funny-happy-baker-picture-id186308619"
+             class="img-fluid" alt="Responsive image">
 
-    <div class="col-md-4 pl-4 bg-white">
-      <br>
-      <h1 class="pt-2"><span>Login to</span>  <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"  class="text-danger font-weight-bold ">Home</span> 
+        </div>
+        <div class="col-md-6">
+            <h1 class="pt-2"><span>Login to</span>  <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"  class="text-danger font-weight-bold ">Home</span> 
       <span style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" class ="text-warning">Chef</span></h1>
-      
-<br>
-      <form class="mr-5 p-4" action="/login" method="post" style="width: 24rem;border-radius: .35rem">
+          <form class="mr-5 p-4" action="/login" method="post" style="border-radius: .35rem">
       {{#if loginErr}}
       <p class="error text-danger text-bold italics">Invalid username or Password</p>
       {{/if}}
   <div class="form-group p-3" >
    
-    <input type="text" name="Name"  class="form-control "  placeholder="Username" style="width: 20rem;border-radius: .75rem;border-width: 2px">
+    <input type="text" name="Name"  class="form-control "  placeholder="Username" style="border-radius: .75rem;border-width: 2px">
     
   </div>
   
   
   <div class="form-group p-3">
     
-    <input type="text" name="Password" class="form-control  "  id="exampleInputPassword1"   placeholder="Password"style="width: 20rem;border-radius: .75rem;border-width: 2px">
+    <input type="text" name="Password" class="form-control  "  id="exampleInputPassword1"   placeholder="Password"style="border-radius: .75rem;border-width: 2px">
   </div>
   
-  <button type="submit" class="btn btn-success  btn-lg mt-4 ml-5" style="width: 13rem;border-radius: 15px;">Sign In </button>
+  <button type="submit" class="btn btn-success  btn-lg mt-4 ml-5" style="border-radius: 15px;">Sign In </button>
   <a  class="text-center"  href="/signup"><p class="text-center ml-2">Don't have account ?Register</a>
 </form>
 
 <p class="text-info text-center">OR</p>
 <hr class=" ml-5 mr-5" style=" border-top: 1px dashed rgb(148, 141, 141);">
 
-<a href="/mblogin"  class="btn btn-success  btn-lg mt-5 ml-5 " style="width: 14rem;border-radius: 15px;">Login with OTP</a>
-<!--<form class="p-4 mr-5" action="/users/otplogin" method="post">
-      <div class="form-group p-4 mr-5" >
-   
-    <input type="tel" name="mobileNumber"  class="form-control "  placeholder="Mobile-Nmber" style="width: 20rem;border-radius: .75rem;border-width: 2px">
-    
-  </div>
-  <p class="text-center">OTP</p>
-  <div class="row pl-4">
-  
-	
-<div class="col-md-3 pl-5">
-	
-	
-		<input id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
-		<input id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
-		<input id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
-		<input id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
-	
-</div>
-    <button type="submit" class="btn btn-success  btn-lg mt-4 ml-5" style="width: 13rem;border-radius: 15px;">Sign In </button>
-    
-</form> -->
+<a href="/mblogin"  class="btn btn-success  btn-lg mt-5 ml-5 " style="border-radius: 15px;">Login with OTP</a>
+
+        </div>
     </div>
-  </div>
+
 </section>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
 
 
-<script>
-    function getCodeBoxElement(index) {
-  return document.getElementById('codeBox' + index);
-}
-function onKeyUpEvent(index, event) {
-  const eventCode = event.which || event.keyCode;
-  if (getCodeBoxElement(index).value.length === 1) {
-	 if (index !== 4) {
-		getCodeBoxElement(index+ 1).focus();
-	 } else {
-		getCodeBoxElement(index).blur();
-		// Submit code
-		console.log('submit code ');
-	 }
-  }
-  if (eventCode === 8 && index !== 1) {
-	 getCodeBoxElement(index - 1).focus();
-  }
-}
-function onFocusEvent(index) {
-  for (item = 1; item < index; item++) {
-	 const currentElement = getCodeBoxElement(item);
-	 if (!currentElement.value) {
-		  currentElement.focus();
-		  break;
-	 }
-  }
-}
-</script>
+

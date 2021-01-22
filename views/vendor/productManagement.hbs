@@ -1,132 +1,134 @@
 <div id="main">
-  
-  
-  
+
+
+
 
   <section>
     <div class="row">
-        
-         <div class="col-md-12 bg-light" >
-              <section>
-                    <div class="row ">
-                        <div class="col-md-12 bg-secondary  p-2">
 
-                            <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
-<h2 class="text-dark ml-2">Food Ordering App|Admin Login hjhj</h2>
-                                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                    data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                                    <div class="navbar-nav ml-auto">
-                                        <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   {{#if vendor}}
-     {{vendor.Name}}
-    {{else}}
-    Account
-   {{/if}}
-    
-  </button>
-  <div class="dropdown-menu  ml-auto" aria-labelledby="dropdownMenuButton">
-       {{#if vendor}}
-     <a class="dropdown-item" href="/vendor/logout">Logout</a>
-    {{else}}
-    <a class="dropdown-item" href="/vendor/login">Login</a>
-   {{/if}}
-    
-   
-  </div>
-</div>
-                           
-                                    </div>
-                                </div>
-                            </nav>
+      <div class="col-md-12 bg-light">
+        <section>
+          <div class="row ">
+            <div class="col-md-12 bg-secondary  p-2">
+
+              <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+                <h2 class="text-dark ml-2">Food Ordering App|Admin Login hjhj</h2>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                  aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav ml-auto">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{#if vendor}}
+                        {{vendor.Name}}
+                        {{else}}
+                        Account
+                        {{/if}}
+
+                      </button>
+                      <div class="dropdown-menu  ml-auto" aria-labelledby="dropdownMenuButton">
+                        {{#if vendor}}
+                        <a class="dropdown-item" href="/vendor/logout">Logout</a>
+                        {{else}}
+                        <a class="dropdown-item" href="/vendor/login">Login</a>
+                        {{/if}}
 
 
-
-                        </div>
+                      </div>
                     </div>
-                </section>
-              
-                         <section>
-                             <div class="row  pl-2 mt-3 ">
-                                  
-  
-                                    
-<a href="/vendor/addProduct"   style="background-color: rgb(65, 8, 65); border-radius: 25px;"  class="btn text-white ml-4">Add product</a>
-                                 </div>
-                             
-                         </section>
+
+                  </div>
+                </div>
+              </nav>
 
 
 
-                     <section class="mt-4">
-                         
-                         <div class="row mt-4 ">
+            </div>
+          </div>
+        </section>
 
-                             
-                                 
-                                   
-        <table class="table mt-5">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Price</th>
-      
-      
-       <th>Image</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each products}}
-    <tr>
-      <th scope="row">1</th>
-      <td>{{this.name}}</td>
-      <td>{{this.price}}</td>
-      
-     
-   <td><img style="width:50px;height:50px" src="/product-images/{{this._id}}.jpg" alt=""></td>
-   <td>
-      <a href="/vendor/editProduct/{{this._id}}" class="btn btn-primary">Edit</a>
-     <a href="/vendor/deleteProduct?id={{this._id}}&name=ezzah" class="btn btn-danger" onclick="return confirm('ar u sure want to delete  {{this.name}}?')">Delete</a>
-   
- 
-   </td>
-    </tr>
- {{/each}}
- 
-  </tbody>
-</table>
-                            
+        <section>
+          <div class="row  pl-2 mt-3 ">
+
+
+
+            <a href="/vendor/addProduct" style="background-color: rgb(65, 8, 65); border-radius: 25px;"
+              class="btn text-white ml-4">Add product</a>
+          </div>
+
+        </section>
+
+
+
+        <section class="mt-4">
+
+          <div class="row mt-4 ">
+
+
+
+
+            <table class="table mt-5">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Price</th>
+
+
+                  <th>Image</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each products}}
+                <tr>
+                  <th scope="row">1</th>
+                  <td>{{this.name}}</td>
+                  <td>{{this.price}}</td>
+
+
+                  <td><img style="width:50px;height:50px" src="/product-images/{{this._id}}.jpg" alt=""></td>
+                  <td>
+                    <a href="/vendor/editProduct/{{this._id}}" class="btn btn-primary">Edit</a>
+                    <a href="/vendor/deleteProduct?id={{this._id}}&name=ezzah" class="btn btn-danger"
+                      onclick="return confirm('ar u sure want to delete  {{this.name}}?')">Delete</a>
+
+
+                  </td>
+                </tr>
+                {{/each}}
+
+              </tbody>
+            </table>
+
+          </div>
+      </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
-                         </div>
-                     </section>
-
-
-
-
-
-                     
-
-
-
-
-
-
-                 
-             
-
-
-
-
 
 </div>
-         
-    </div>
 </section>
 
 

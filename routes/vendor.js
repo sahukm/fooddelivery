@@ -222,6 +222,33 @@ router.post('/login',async(req,res)=>{
       res.render('vendor/editProduct',{product,vendor:req.session.vendor,vendorHead:true})
       
     })
+    /*router.get('/thisMonth',async(req,res)=>{
+      console.log("hi sales vendor");
+      
+      console.log(req.session.vendor);
+      console.log(req.session.vendor._id);
+      console.log("hi vn idddd");
+    
+  
+     let vendororderItems=await userHelpers.getVendorOrderProducts(req.session.vendor._id)
+     console.log("vendr ordrd prods...");
+     console.log(vendororderItems);
+    
+     /* let orders=await userHelpers.getUserOrders(req.session.user._id)
+      console.log(orders);
+      console.log("hi new orders");
+
+      res.render('vendor/salesReport',{vendorHead:true,vendororderItems,vendor:req.session.vendor})
+      console.log("hi after sales");
+      /*res.redirect('login');*/ 
+      /*res.render('admin/login')
+    })*/
+    router.get('/editProduct/:id',async (req,res)=>{
+      let product=await productHelpers.getProductDetails(req.params.id)
+      console.log(product);
+      res.render('vendor/editProduct',{product,vendor:req.session.vendor,vendorHead:true})
+      
+    })
 
 
     router.post('/editProduct/:id',(req,res)=>{

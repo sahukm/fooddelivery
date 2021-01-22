@@ -16,9 +16,9 @@ var categoryHelpers = require('../helpers/category-helpers');
 const vendorHelpers = require('../helpers/vendor-helpers');
 
 /*var messagebird =require('messagebird')('Q6ZxlvfMhozXeoq2GPv1nBWIL')*/
-/*var messagebird =require('messagebird')('CRS2pJhdg3wqBbn30VxKxiCqV')*/
+var messagebird =require('messagebird')('CRS2pJhdg3wqBbn30VxKxiCqV')
 
-var messagebird =require('messagebird')('EngLyVf7PkJXmzmyqXMXib3dd')
+/*var messagebird =require('messagebird')('EngLyVf7PkJXmzmyqXMXib3dd')*/
 
 
 /* GET home page. */
